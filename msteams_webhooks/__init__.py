@@ -27,6 +27,4 @@ class TeamsWebhook:
             raise TeamsWebhookError(self.response.text)
         if "429" in self.response.text:
             # Rate limit errors receive HTTP code 200 with 429 in response body.
-            raise TeamsRateLimitError(
-                "Message rate exceeds limit of 4 messages per second."
-            )
+            raise TeamsRateLimitError("Exceeded message rate limit.")

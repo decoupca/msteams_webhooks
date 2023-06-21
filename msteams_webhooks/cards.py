@@ -1,20 +1,20 @@
 from typing import Optional
 
 from msteams_webhooks.buttons import Button
-from msteams_webhooks.types import URL
+from msteams_webhooks import types
 
 
 class Card:
-    content_type = ""
-    schema = ""
+    TYPE = ""
+    SCHEMA = ""
 
     def serialize(self) -> dict:
         pass
 
 
 class AdaptiveCard(Card):
-    schema = "http://adaptivecards.io/schemas/adaptive-card.json"
-    card_type = "AdaptiveCard"
+    TYPE = "AdaptiveCard"
+    SCHEMA = "http://adaptivecards.io/schemas/adaptive-card.json"
 
     def __init__(self) -> None:
         self.body = []
@@ -24,8 +24,8 @@ class AdaptiveCard(Card):
         payload = {
             "contentType": "application/vnd.microsoft.card.adaptive",
             "content": {
-                "$schema": self.schema,
-                "type": self.card_type,
+                "$schema": self.SCHEMA,
+                "type": self.TYPE,
                 "version": "1.5",
             },
         }
@@ -41,7 +41,7 @@ class ConnectorCard(Card):
 
 
 class HeroCard(Card):
-    content_type = "application/vnd.microsoft.card.hero"
+    TYPE = "application/vnd.microsoft.card.hero"
 
     def __init__(
         self,
@@ -49,7 +49,7 @@ class HeroCard(Card):
         text: str,
         *,
         subtitle: Optional[str] = None,
-        images: Optional[list[URL]] = None,
+        images: Optional[list[types.URL]] = None,
         buttons: Optional[list[Button]] = None
     ) -> None:
         self.title = title
@@ -59,7 +59,7 @@ class HeroCard(Card):
         self.buttons = buttons
 
     def serialize(self) -> dict:
-        payload = {"contentType": self.content_type, "content": {}}
+        payload = {"contentType": self.TYPE, "content": {}}
         payload["content"]["title"] = self.title
         payload["content"]["text"] = self.text
         if self.subtitle:
