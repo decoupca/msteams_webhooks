@@ -1,33 +1,55 @@
-from typing import Optional
+from typing import Literal, Optional, Union
 
-from msteams_webhooks.types import (
-    Colors,
-    FontSizes,
-    FontTypes,
-    FontWeights,
-    HorizontalAlignmentTypes,
-    TextBlockStyles,
-)
+from msteams_webhooks import types
 
 
 class Element:
-    pass
+    """Base Element class."""
+
+    TYPE = ""
+    ATTR_MAP = {}
+
+    def serialize(self) -> dict:
+        payload = {"type": self.TYPE}
+        for attr, key in self.ATTR_MAP.items():
+            if value := getattr(self, attr):
+                if value is not None:
+                    payload[key] = value
+        return payload
 
 
 class TextBlock(Element):
+    """TextBlock element.
+    https://adaptivecards.io/explorer/TextBlock.html
+    """
+
+    TYPE = "TextBlock"
+    ATTR_MAP = {
+        "text": "text",
+        "color": "color",
+        "font_type": "fontType",
+        "horizontal_alignment": "horizontalAlignment",
+        "is_subtle": "isSubtle",
+        "max_lines": "maxLines",
+        "size": "size",
+        "weight": "weight",
+        "wrap": "wrap",
+        "style": "style",
+    }
+
     def __init__(
         self,
         text: str,
         *,
-        color: Optional[Colors] = None,
-        font_type: Optional[FontTypes] = None,
-        horizontal_alignment: Optional[HorizontalAlignmentTypes] = None,
+        color: Optional[types.Colors] = None,
+        font_type: Optional[types.FontTypes] = None,
+        horizontal_alignment: Optional[types.HorizontalAlignmentTypes] = None,
         is_subtle: Optional[bool] = None,
         max_lines: Optional[int] = None,
-        size: Optional[FontSizes] = None,
-        weight: Optional[FontWeights] = None,
+        size: Optional[types.FontSizes] = None,
+        weight: Optional[types.FontWeights] = None,
         wrap: Optional[bool] = None,
-        style: Optional[TextBlockStyles] = None,
+        style: Optional[types.TextBlockStyles] = None,
     ) -> None:
         self.text = text
         self.color = color
@@ -40,27 +62,46 @@ class TextBlock(Element):
         self.wrap = wrap
         self.style = style
 
-    def serialize(self) -> dict:
-        payload = {
-            "type": "TextBlock",
-            "text": self.text,
-        }
-        if self.color:
-            payload["color"] = self.color
-        if self.font_type:
-            payload["fontType"] = self.font_type
-        if self.horizontal_alignment:
-            payload["horizontalAlighment"] = self.horizontal_alignment
-        if self.is_subtle is not None:
-            payload["isSubtle"] = self.is_subtle
-        if self.max_lines:
-            payload["maxLines"] = self.max_lines
-        if self.size:
-            payload["size"] = self.size
-        if self.weight:
-            payload["weight"] = self.weight
-        if self.wrap is not None:
-            payload["wrap"] = self.wrap
-        if self.style:
-            payload["style"] = self.style
-        return payload
+
+class Image(Element):
+    """
+    Image element.
+    https://adaptivecards.io/explorer/Image.html
+
+    """
+
+    TYPE = ("Image",)
+    ATTR_MAP = {
+        "url": "url",
+        "alt_text": "altText",
+        "background_color": "backgroundColor",
+        "height": "height",
+        "horizontal_alignment": "horizontalAlignment",
+        "select_action": "selectAction",
+        "size": "size",
+        "style": "style",
+        "width": "width",
+    }
+
+    def __init__(
+        self,
+        url: types.URL,
+        *,
+        alt_text: Optional[str] = None,
+        background_color: Optional[str] = None,
+        height: Optional[Union[str, Literal["auto", "stretch"]]] = None,
+        horizontal_alignment: Optional[types.HorizontalAlignmentTypes] = None,
+        select_action,
+        size: Optional[types.ImageSizeTypes] = None,
+        style: Optional[types.ImageStyleTypes] = None,
+        width: Optional[str] = None,
+    ) -> None:
+        self.url = url
+        self.alt_text = alt_text
+        self.background_color = background_color
+        self.height = height
+        self.horizontal_alignment = horizontal_alignment
+        self.select_action = select_action
+        self.size = size
+        self.style = style
+        self.width = width
