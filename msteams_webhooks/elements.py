@@ -70,7 +70,7 @@ class Image(Element):
 
     """
 
-    TYPE = ("Image",)
+    TYPE = "Image"
     ATTR_MAP = {
         "url": "url",
         "alt_text": "altText",
