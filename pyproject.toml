@@ -1,24 +1,28 @@
-[tool.poetry]
-name = "msteams_webhooks"
-version = "0.1.0"
-description = "A modern Python API for sending messages to Microsoft Teams using webhooks."
-authors = ["Austin de Coup-Crank <austindcc@gmail.com>"]
-license = "MIT"
-readme = "README.md"
-packages = [{include = "msteams_webhooks"}]
-
-[tool.poetry.dependencies]
-python = "^3.9"
-httpx = "^0.24.1"
-
-[tool.poetry.group.dev.dependencies]
-black = "^23.3.0"
-ruff = "^0.0.274"
-isort = "^5.12.0"
-
 [build-system]
-requires = ["poetry-core"]
-build-backend = "poetry.core.masonry.api"
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "msteams_webhooks"
+description = "A modern Python API for sending messages to Microsoft Teams using webhooks."
+license = "MIT"
+requires-python = ">=3.9"
+authors = [
+    { name = "Austin de Coup-Crank", email = "austindcc@gmail.com" },
+]
+classifiers = [
+    "Intended Audience :: Developers",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3 :: Only",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+]
+dependencies = [
+    "httpx>=0.24.1",
+]
+dynamic = ["readme", "version"]
 
 [tool.isort]
 profile = "black"
