@@ -12,18 +12,6 @@ Teams webhooks [support most card types](https://learn.microsoft.com/en-us/micro
 
 This package aims to provide a consistent, stable Python API for all cards and elements supported by the Teams webhook API. 
 
-## Limitations
-
-### Mentions
-
-#### Whole Channel
-
-There is currently no way to notify/mention the whole channel using webhooks. This feature is only available to [Bots](https://learn.microsoft.com/en-us/microsoftteams/platform/bots/what-are-bots).
-
-#### Individuals
-
-The Teams webhooks API does upport [mentioning individuals](https://learn.microsoft.com/en-us/microsoftteams/platform/task-modules-and-cards/cards/cards-format?tabs=adaptive-md%2Cdesktop%2Cconnector-html#user-mention-in-incoming-webhook-with-adaptive-cards). However, the approach is somewhat complex and has not yet been implemented by `msteams_webhooks`.
-
 ## Quick Start
 
 ### Install package
@@ -151,3 +139,15 @@ import httpx
 channel = TeamsWebhook('<your-webhook-url>')
 channel.client = httpx.Client(...)
 ```
+
+## Limitations
+
+### Mentions
+
+#### Whole Channel
+
+There is currently no way to notify/mention the whole channel using webhooks. This feature is only available to [Bots](https://learn.microsoft.com/en-us/microsoftteams/platform/bots/what-are-bots).
+
+#### Individuals
+
+The Teams webhooks API does support [mentioning individuals](https://learn.microsoft.com/en-us/microsoftteams/platform/task-modules-and-cards/cards/cards-format?tabs=adaptive-md%2Cdesktop%2Cconnector-html#user-mention-in-incoming-webhook-with-adaptive-cards). However, the approach is somewhat complex and has not yet been implemented by `msteams_webhooks`.
