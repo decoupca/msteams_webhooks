@@ -3,9 +3,9 @@ from typing import Union
 
 import httpx
 
+from msteams_webhooks import types
 from msteams_webhooks.cards import Card
 from msteams_webhooks.exceptions import TeamsRateLimitError, TeamsWebhookError
-from msteams_webhooks import types
 
 
 class TeamsWebhook:
@@ -20,7 +20,19 @@ class TeamsWebhook:
         self.client = httpx.Client(verify=verify, timeout=timeout)
         self.response = None
 
-    def send(self, card: Card) -> None:
+    def send_card(self, card: Card) -> None:
+        """Sends a card to the channel.
+
+        Args:
+            card: The card to send.
+
+        Returns:
+            None.
+
+        Raises:
+            TeamsWebhookError if the response was not 200/OK.
+            TeamsRateLimitError if 429 was found inside the response body.
+        """
         headers = {"Content-Type": "application/json"}
         data = {"type": "message", "attachments": [card.serialize()]}
         self.response = self.client.post(self.url, json=data, headers=headers)

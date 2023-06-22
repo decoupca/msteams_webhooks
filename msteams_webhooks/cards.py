@@ -1,7 +1,7 @@
 from typing import Optional
 
-from msteams_webhooks.buttons import Button
 from msteams_webhooks import types
+from msteams_webhooks.buttons import Button
 
 
 class Card:
