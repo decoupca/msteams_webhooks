@@ -5,6 +5,7 @@ build-backend = "hatchling.build"
 [project]
 name = "msteams_webhooks"
 description = "A modern Python API for sending messages to Microsoft Teams using webhooks."
+readme = "README.md"
 license = "MIT"
 requires-python = ">=3.9"
 authors = [
@@ -22,7 +23,7 @@ classifiers = [
 dependencies = [
     "httpx>=0.24.1",
 ]
-dynamic = ["readme", "version"]
+dynamic = ["version"]
 
 [project.urls]
 Homepage = "https://github.com/decoupca/msteams_webhooks"
