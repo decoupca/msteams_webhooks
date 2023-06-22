@@ -151,3 +151,15 @@ There is currently no way to notify/mention the whole channel using webhooks. Th
 #### Individuals
 
 The Teams webhooks API does support [mentioning individuals](https://learn.microsoft.com/en-us/microsoftteams/platform/task-modules-and-cards/cards/cards-format?tabs=adaptive-md%2Cdesktop%2Cconnector-html#user-mention-in-incoming-webhook-with-adaptive-cards). However, the approach is somewhat complex and has not yet been implemented by `msteams_webhooks`.
+
+## Roadmap
+
+### Near-term
+
+Features for 1.0.0:
+* Implement all elements, actions, and container objects relevant to webhooks.
+
+### Mid-term
+
+* Add support for mentioning individuals in Adaptive Cards.
+* Implement an `AsyncTeamsWebhook` class.
