@@ -1,23 +1,24 @@
-[project]
+[tool.poetry]
 name = "msteams_webhooks"
-version = "0.0.1"
-authors = [
-  { name="Austin de Coup-Crank", email="austindcc@gmail.com" },
-]
+version = "0.1.0"
 description = "A modern Python API for sending messages to Microsoft Teams using webhooks."
+authors = ["Austin de Coup-Crank <austindcc@gmail.com>"]
+license = "MIT"
 readme = "README.md"
-requires-python = ">=3.9"
-classifiers = [
-    "Programming Language :: Python :: 3",
-    "Operating System :: OS Independent",
-]
-dependencies = [
-    "httpx >= 0.24.1",
-]
+packages = [{include = "msteams_webhooks"}]
 
-[project.urls]
-"Homepage" = "https://github.com/decoupca/msteams_webhooks"
-"Bug Tracker" = "https://github.com/decoupca/msteams_webhooks/issues"
+[tool.poetry.dependencies]
+python = "^3.9"
+httpx = "^0.24.1"
+
+[tool.poetry.group.dev.dependencies]
+black = "^23.3.0"
+ruff = "^0.0.274"
+isort = "^5.12.0"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
 
 [tool.isort]
 profile = "black"
