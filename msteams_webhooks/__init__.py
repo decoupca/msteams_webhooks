@@ -5,12 +5,13 @@ import httpx
 
 from msteams_webhooks.cards import Card
 from msteams_webhooks.exceptions import TeamsRateLimitError, TeamsWebhookError
+from msteams_webhooks import types
 
 
 class TeamsWebhook:
     def __init__(
         self,
-        url: str,
+        url: types.URL,
         *,
         verify: Union[str, bool, ssl.SSLContext] = True,
         timeout: float = 15.0
