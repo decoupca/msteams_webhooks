@@ -24,5 +24,9 @@ dependencies = [
 ]
 dynamic = ["readme", "version"]
 
+[project.urls]
+Homepage = "https://github.com/decoupca/msteams_webhooks"
+Source = "https://github.com/decoupca/msteams_webhooks"
+
 [tool.isort]
 profile = "black"
