@@ -28,5 +28,8 @@ dynamic = ["readme", "version"]
 Homepage = "https://github.com/decoupca/msteams_webhooks"
 Source = "https://github.com/decoupca/msteams_webhooks"
 
+[tool.hatch.version]
+path = "msteams_webhooks/__version__.py"
+
 [tool.isort]
 profile = "black"
