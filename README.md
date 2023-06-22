@@ -14,7 +14,7 @@ This package aims to provide a consistent, stable Python API for all cards and e
 
 ## Quick Start
 
-### Install package
+### Install
 
 Until the package reaches stability, this package will not be added to PyPI. For now, install it from git:
 

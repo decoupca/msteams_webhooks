@@ -105,3 +105,49 @@ class Image(Element):
         self.size = size
         self.style = style
         self.width = width
+
+
+class MediaSource(Element):
+    """Media source element.
+
+    https://adaptivecards.io/explorer/MediaSource.html
+    """
+
+    def __init__(self, url: types.URL, *, mime_type: Optional[str] = None) -> None:
+        self.url = url
+        self.mime_type = mime_type
+
+    def serialize(self) -> dict:
+        """Serialize object into data structure."""
+        payload = {"url": self.url}
+        if self.mime_type:
+            payload["mimeType"] = self.mime_type
+        return payload
+
+
+class Media(Element):
+    """Media element.
+
+    https://adaptivecards.io/explorer/Media.html
+    """
+
+    def __init__(
+        self,
+        sources: list[MediaSource],
+        *,
+        poster: Optional[types.URL] = None,
+        alt_text: Optional[str] = None,
+    ) -> None:
+        self.sources = sources
+        self.poster = poster
+        self.alt_text = alt_text
+
+    def serialize(self) -> dict:
+        payload = {
+            "type": "Media",
+            "sources": [x.serialize() for x in self.sources],
+        }
+        if self.poster:
+            payload["poster"] = self.poster
+        if self.alt_text:
+            payload["altText"] = self.alt_text
