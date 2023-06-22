@@ -151,3 +151,4 @@ class Media(Element):
             payload["poster"] = self.poster
         if self.alt_text:
             payload["altText"] = self.alt_text
+        return payload
