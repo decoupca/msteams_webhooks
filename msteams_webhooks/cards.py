@@ -1,10 +1,10 @@
 from typing import Optional, Union
 
 from msteams_webhooks import types
-from msteams_webhooks.buttons import Button
-from msteams_webhooks.elements import Element
 from msteams_webhooks.actions import Action
-from msteams_webhooks.containers import Container
+from msteams_webhooks.buttons import Button
+from msteams_webhooks.containers import CardContainer
+from msteams_webhooks.elements import CardElement
 
 
 class Card:
@@ -22,7 +22,7 @@ class AdaptiveCard(Card):
     def __init__(
         self,
         *,
-        body: Optional[Union[list(Element), list[Container]]] = None,
+        body: Optional[list[Union[CardElement, CardContainer]]] = None,
         actions: Optional[list[Action]] = None,
     ) -> None:
         self.body = body or []
@@ -75,9 +75,7 @@ class HeroCard(Card):
         if self.images:
             payload["content"]["images"] = [{"url": img} for img in self.images]
         if self.buttons:
-            payload["content"]["buttons"] = [
-                button.serialize() for button in self.buttons
-            ]
+            payload["content"]["buttons"] = [x.serialize() for x in self.buttons]
         return payload
 
 

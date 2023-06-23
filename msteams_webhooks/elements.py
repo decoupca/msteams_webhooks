@@ -1,9 +1,10 @@
 from typing import Literal, Optional, Union
 
 from msteams_webhooks import types
+from msteams_webhooks.actions import Action
 
 
-class Element:
+class CardElement:
     """Base Element class."""
 
     TYPE = ""
@@ -18,7 +19,7 @@ class Element:
         return payload
 
 
-class TextBlock(Element):
+class TextBlock(CardElement):
     """TextBlock element.
     https://adaptivecards.io/explorer/TextBlock.html
     """
@@ -63,7 +64,7 @@ class TextBlock(Element):
         self.style = style
 
 
-class Image(Element):
+class Image(CardElement):
     """
     Image element.
     https://adaptivecards.io/explorer/Image.html
@@ -91,7 +92,7 @@ class Image(Element):
         background_color: Optional[str] = None,
         height: Optional[Union[str, Literal["auto", "stretch"]]] = None,
         horizontal_alignment: Optional[types.HorizontalAlignmentTypes] = None,
-        select_action,
+        select_action: Optional[Action] = None,
         size: Optional[types.ImageSizeTypes] = None,
         style: Optional[types.ImageStyleTypes] = None,
         width: Optional[str] = None,
@@ -107,7 +108,7 @@ class Image(Element):
         self.width = width
 
 
-class MediaSource(Element):
+class MediaSource(CardElement):
     """Media source element.
 
     https://adaptivecards.io/explorer/MediaSource.html
@@ -125,7 +126,7 @@ class MediaSource(Element):
         return payload
 
 
-class Media(Element):
+class Media(CardElement):
     """Media element.
 
     https://adaptivecards.io/explorer/Media.html
