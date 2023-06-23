@@ -2,7 +2,7 @@ from typing import Optional, Union
 
 from msteams_webhooks import types
 from msteams_webhooks.actions import Action
-from msteams_webhooks.elements import CardElement
+from msteams_webhooks.elements import CardElement, Image
 
 
 class CardContainer:
@@ -210,3 +210,27 @@ class FactSet(CardContainer):
             "type": self.TYPE,
             "facts": [x.serialize() for x in self.facts],
         }
+
+
+class ImageSet(CardContainer):
+    """ImageSet.
+
+    https://adaptivecards.io/explorer/ImageSet.html
+    """
+
+    TYPE = "ImageSet"
+
+    def __init__(
+        self, images: list[Image], *, image_size: Optional[types.ImageSizeTypes] = None
+    ) -> None:
+        self.images = images
+        self.image_size = image_size
+
+    def serialize(self) -> dict:
+        payload = {
+            "type": self.TYPE,
+            "images": [x.serialize() for x in self.images],
+        }
+        if self.image_size:
+            payload["imageSize"] = self.image_size
+        return payload
