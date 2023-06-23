@@ -178,3 +178,35 @@ class ColumnSet(CardContainer):
         if self.horizontal_alignment:
             payload["horizontalAlignment"] = self.horizontal_alignment
         return payload
+
+
+class Fact(CardContainer):
+    """Fact.
+
+    https://adaptivecards.io/explorer/Fact.html
+    """
+
+    def __init__(self, title: str, value: str) -> None:
+        self.title = title
+        self.value = value
+
+    def serialize(self) -> dict:
+        return {"title": self.title, "value": self.value}
+
+
+class FactSet(CardContainer):
+    """FactSet.
+
+    https://adaptivecards.io/explorer/FactSet.html
+    """
+
+    TYPE = "FactSet"
+
+    def __init__(self, facts: list[Fact]) -> None:
+        self.facts = facts
+
+    def serialize(self) -> dict:
+        return {
+            "type": self.TYPE,
+            "facts": [x.serialize() for x in self.facts],
+        }
