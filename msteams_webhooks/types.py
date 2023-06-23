@@ -10,10 +10,6 @@ VerticalAlignmentTypes = Literal["top", "center", "bottom"]
 TextBlockStyles = Literal["default", "heading"]
 ImageSizeTypes = Literal["auto", "stretch", "small", "medium", "large"]
 ImageStyleTypes = Literal["default", "person"]
-ContainerStyleTypes = Literal[
-    "default", "emphasis", "good", "attention", "warning", "accent"
-]
-SpacingTypes = Literal[
-    "default", "none", "small", "medium", "large", "extraLarge", "padding"
-]
+ContainerStyleTypes = Literal["default", "emphasis", "good", "attention", "warning", "accent"]
+SpacingTypes = Literal["default", "none", "small", "medium", "large", "extraLarge", "padding"]
 ColumnWidthTypes = Union[Literal["auto", "stretch"], str]

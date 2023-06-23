@@ -328,9 +328,7 @@ class Table(CardContainer):
         first_row_as_headers: Optional[bool] = None,
         show_grid_lines: Optional[bool] = None,
         grid_style: Optional[types.ContainerStyleTypes] = None,
-        horizontal_cell_content_alignment: Optional[
-            types.HorizontalAlignmentTypes
-        ] = None,
+        horizontal_cell_content_alignment: Optional[types.HorizontalAlignmentTypes] = None,
         vertical_cell_content_alignment: Optional[types.VerticalAlignmentTypes] = None,
     ) -> None:
         self.columns = columns
@@ -354,11 +352,7 @@ class Table(CardContainer):
         if self.grid_style:
             payload["gridStyle"] = self.grid_style
         if self.horizontal_cell_content_alignment:
-            payload[
-                "horizontalCellContentAlignment"
-            ] = self.horizontal_cell_content_alignment
+            payload["horizontalCellContentAlignment"] = self.horizontal_cell_content_alignment
         if self.vertical_cell_content_alignment:
-            payload[
-                "verticalCellContentAlignment"
-            ] = self.vertical_cell_content_alignment
+            payload["verticalCellContentAlignment"] = self.vertical_cell_content_alignment
         return payload
