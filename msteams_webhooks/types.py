@@ -1,4 +1,4 @@
-from typing import Literal, NewType
+from typing import Literal, NewType, Union
 
 URL = NewType("URL", str)
 Colors = Literal["default", "accent", "good", "warning", "attention", "light", "dark"]
@@ -13,3 +13,7 @@ ImageStyleTypes = Literal["default", "person"]
 ContainerStyleTypes = Literal[
     "default", "emphasis", "good", "attention", "warning", "accent"
 ]
+SpacingTypes = Literal[
+    "default", "none", "small", "medium", "large", "extraLarge", "padding"
+]
+ColumnWidthTypes = Union[Literal["auto", "stretch"], str]
