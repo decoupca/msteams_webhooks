@@ -137,3 +137,44 @@ class Column(CardContainer):
         if self.width:
             payload["width"] = self.width
         return payload
+
+
+class ColumnSet(CardContainer):
+    """ColumnSet.
+
+    https://adaptivecards.io/explorer/ColumnSet.html
+    """
+
+    TYPE = "ColumnSet"
+
+    def __init__(
+        self,
+        columns: Optional[list[Column]] = None,
+        select_action: Optional[Action] = None,
+        style: Optional[types.ContainerStyleTypes] = None,
+        bleed: Optional[bool] = None,
+        min_height: Optional[str] = None,
+        horizontal_alignment: Optional[types.HorizontalAlignmentTypes] = None,
+    ) -> None:
+        self.columns = columns
+        self.select_action = select_action
+        self.style = style
+        self.bleed = bleed
+        self.min_height = min_height
+        self.horizontal_alignment = horizontal_alignment
+
+    def serialize(self) -> dict:
+        payload = {"type": self.TYPE}
+        if self.columns:
+            payload["columns"] = [x.serialize() for x in self.columns]
+        if self.select_action:
+            payload["selectAction"] = self.select_action.serialize()
+        if self.style:
+            payload["style"] = self.style
+        if self.bleed is not None:
+            payload["bleed"] = self.bleed
+        if self.min_height:
+            payload["minHeight"] = self.min_height
+        if self.horizontal_alignment:
+            payload["horizontalAlignment"] = self.horizontal_alignment
+        return payload
