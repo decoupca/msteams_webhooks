@@ -2,6 +2,8 @@ from typing import Optional
 
 from msteams_webhooks import types
 from msteams_webhooks.buttons import Button
+from msteams_webhooks.elements import Element
+from msteams_webhooks.actions import Action
 
 
 class Card:
@@ -16,9 +18,14 @@ class AdaptiveCard(Card):
     TYPE = "AdaptiveCard"
     SCHEMA = "http://adaptivecards.io/schemas/adaptive-card.json"
 
-    def __init__(self) -> None:
-        self.body = []
-        self.actions = []
+    def __init__(
+        self,
+        *,
+        body: Optional[list(Element)] = None,
+        actions: Optional[list[Action]] = None,
+    ) -> None:
+        self.body = body or []
+        self.actions = actions or []
 
     def serialize(self) -> dict:
         payload = {
@@ -50,7 +57,7 @@ class HeroCard(Card):
         *,
         subtitle: Optional[str] = None,
         images: Optional[list[types.URL]] = None,
-        buttons: Optional[list[Button]] = None
+        buttons: Optional[list[Button]] = None,
     ) -> None:
         self.title = title
         self.text = text
