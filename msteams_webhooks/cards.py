@@ -1,9 +1,10 @@
-from typing import Optional
+from typing import Optional, Union
 
 from msteams_webhooks import types
 from msteams_webhooks.buttons import Button
 from msteams_webhooks.elements import Element
 from msteams_webhooks.actions import Action
+from msteams_webhooks.containers import Container
 
 
 class Card:
@@ -21,7 +22,7 @@ class AdaptiveCard(Card):
     def __init__(
         self,
         *,
-        body: Optional[list(Element)] = None,
+        body: Optional[Union[list(Element), list[Container]]] = None,
         actions: Optional[list[Action]] = None,
     ) -> None:
         self.body = body or []
