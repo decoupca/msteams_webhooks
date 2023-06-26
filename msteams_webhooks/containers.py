@@ -292,11 +292,17 @@ class TableRow(CardContainer):
 
     TYPE = "TableRow"
 
-    def __init__(self, cells: list[TableCell]) -> None:
+    def __init__(
+        self, cells: list[TableCell], style: Optional[types.ContainerStyleTypes] = None
+    ) -> None:
         self.cells = cells
+        self.style = style
 
     def serialize(self) -> dict[str, Any]:
-        return {"type": self.TYPE, "cells": [x.serialize() for x in self.cells]}
+        payload = {"type": self.TYPE, "cells": [x.serialize() for x in self.cells]}
+        if self.style:
+            payload["style"] = self.style
+        return payload
 
 
 class Table(CardContainer):
