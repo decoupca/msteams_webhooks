@@ -3,7 +3,7 @@ from msteams_webhooks import types
 
 class Button:
     def serialize(self) -> dict:
-        pass
+        return {}
 
 
 class OpenURLButton(Button):

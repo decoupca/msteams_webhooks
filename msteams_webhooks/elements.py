@@ -1,4 +1,4 @@
-from typing import Literal, Optional, Union
+from typing import Any, Literal, Optional, Union
 
 from msteams_webhooks import types
 from msteams_webhooks.actions import Action
@@ -10,7 +10,7 @@ class CardElement:
     TYPE = ""
     ATTR_MAP = {}
 
-    def serialize(self) -> dict:
+    def serialize(self) -> dict[str, Any]:
         payload = {"type": self.TYPE}
         for attr, key in self.ATTR_MAP.items():
             if value := getattr(self, attr):
@@ -118,7 +118,7 @@ class MediaSource(CardElement):
         self.url = url
         self.mime_type = mime_type
 
-    def serialize(self) -> dict:
+    def serialize(self) -> dict[str, Any]:
         """Serialize object into data structure."""
         payload = {"url": self.url}
         if self.mime_type:

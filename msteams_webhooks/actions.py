@@ -8,7 +8,7 @@ class Action:
 
     def serialize(self) -> dict:
         """Serialize object into data structure."""
-        pass
+        return {}
 
 
 class OpenURLAction(Action):

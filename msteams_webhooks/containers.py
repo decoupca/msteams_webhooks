@@ -1,4 +1,4 @@
-from typing import Optional, Union
+from typing import Any, Optional, Union
 
 from msteams_webhooks import types
 from msteams_webhooks.actions import Action
@@ -8,8 +8,8 @@ from msteams_webhooks.elements import CardElement, Image
 class CardContainer:
     """Base container class."""
 
-    def serialize(self) -> dict:
-        pass
+    def serialize(self) -> dict[str, Any]:
+        return {}
 
 
 class ActionSet(CardContainer):
@@ -23,7 +23,7 @@ class ActionSet(CardContainer):
     def __init__(self, actions: list[Action]) -> None:
         self.actions = actions
 
-    def serialize(self) -> dict:
+    def serialize(self) -> dict[str, Any]:
         return {"type": self.TYPE, "actions": [x.serialize() for x in self.actions]}
 
 
@@ -56,7 +56,7 @@ class Container(CardContainer):
         self.min_height = min_height
         self.rtl = rtl
 
-    def serialize(self) -> dict:
+    def serialize(self) -> dict[str, Any]:
         payload = {
             "type": self.TYPE,
             "items": [x.serialize() for x in self.items],
@@ -112,7 +112,7 @@ class Column(CardContainer):
         self.vertical_content_alignment = vertical_content_alignment
         self.width = width
 
-    def serialize(self) -> dict:
+    def serialize(self) -> dict[str, Any]:
         payload = {"type": self.TYPE}
         if self.items:
             payload["items"] = [x.serialize() for x in self.items]
@@ -163,7 +163,7 @@ class ColumnSet(CardContainer):
         self.min_height = min_height
         self.horizontal_alignment = horizontal_alignment
 
-    def serialize(self) -> dict:
+    def serialize(self) -> dict[str, Any]:
         payload = {"type": self.TYPE}
         if self.columns:
             payload["columns"] = [x.serialize() for x in self.columns]
@@ -190,7 +190,7 @@ class Fact(CardContainer):
         self.title = title
         self.value = value
 
-    def serialize(self) -> dict:
+    def serialize(self) -> dict[str, Any]:
         return {"title": self.title, "value": self.value}
 
 
@@ -205,7 +205,7 @@ class FactSet(CardContainer):
     def __init__(self, facts: list[Fact]) -> None:
         self.facts = facts
 
-    def serialize(self) -> dict:
+    def serialize(self) -> dict[str, Any]:
         return {
             "type": self.TYPE,
             "facts": [x.serialize() for x in self.facts],
@@ -226,7 +226,7 @@ class ImageSet(CardContainer):
         self.images = images
         self.image_size = image_size
 
-    def serialize(self) -> dict:
+    def serialize(self) -> dict[str, Any]:
         payload = {
             "type": self.TYPE,
             "images": [x.serialize() for x in self.images],
@@ -265,7 +265,7 @@ class TableCell(CardContainer):
         self.min_height = min_height
         self.rtl = rtl
 
-    def serialize(self) -> dict:
+    def serialize(self) -> dict[str, Any]:
         payload = {
             "type": self.TYPE,
             "items": [x.serialize() for x in self.items],
@@ -295,7 +295,7 @@ class TableRow(CardContainer):
     def __init__(self, cells: list[TableCell]) -> None:
         self.cells = cells
 
-    def serialize(self) -> dict:
+    def serialize(self) -> dict[str, Any]:
         return {"type": self.TYPE, "cells": [x.serialize() for x in self.cells]}
 
 
@@ -309,7 +309,7 @@ class TableColumn:
     def __init__(self, width: int) -> None:
         self.width = width
 
-    def serialize(self) -> dict:
+    def serialize(self) -> dict[str, Any]:
         return {"width": self.width}
 
 
@@ -339,7 +339,7 @@ class Table(CardContainer):
         self.horizontal_cell_content_alignment = horizontal_cell_content_alignment
         self.vertical_cell_content_alignment = vertical_cell_content_alignment
 
-    def serialize(self) -> dict:
+    def serialize(self) -> dict[str, Any]:
         payload = {"type": self.TYPE}
         if self.columns:
             payload["columns"] = [x.serialize() for x in self.columns]

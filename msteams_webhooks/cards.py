@@ -12,7 +12,7 @@ class Card:
     SCHEMA = ""
 
     def serialize(self) -> dict:
-        pass
+        return {}
 
 
 class AdaptiveCard(Card):
