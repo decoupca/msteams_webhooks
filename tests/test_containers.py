@@ -26,8 +26,20 @@ def test_container() -> None:
                 "altText": "Cat",
             },
         ],
+        "style": "attention",
+        "verticalContentAlignment": "bottom",
+        "bleed": True,
+        "minHeight": "150px",
+        "rtl": True,
     }
     text_block = elements.TextBlock(text="This is some text")
     image = elements.Image(url="https://adaptivecards.io/content/cats/1.png", alt_text="Cat")
-    container = containers.Container(items=[text_block, image])
+    container = containers.Container(
+        items=[text_block, image],
+        vertical_content_alignment="bottom",
+        style="attention",
+        min_height="150px",
+        bleed=True,
+        rtl=True,
+    )
     assert container.serialize() == payload
