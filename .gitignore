@@ -165,3 +165,4 @@ output/
 config.py
 .DS_Store
 sandbox.py
+.vscode/
