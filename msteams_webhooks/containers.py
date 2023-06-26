@@ -299,20 +299,6 @@ class TableRow(CardContainer):
         return {"type": self.TYPE, "cells": [x.serialize() for x in self.cells]}
 
 
-class TableColumn:
-    """TableColumn.
-
-    This entity is not documented beyond a few Table examples. Other properties
-    are unknown.
-    """
-
-    def __init__(self, width: int) -> None:
-        self.width = width
-
-    def serialize(self) -> dict[str, Any]:
-        return {"width": self.width}
-
-
 class Table(CardContainer):
     """Table.
 
@@ -323,7 +309,7 @@ class Table(CardContainer):
 
     def __init__(
         self,
-        columns: Optional[list[TableColumn]] = None,
+        columns: Optional[list[Column]] = None,
         rows: Optional[list[TableRow]] = None,
         first_row_as_headers: Optional[bool] = None,
         show_grid_lines: Optional[bool] = None,

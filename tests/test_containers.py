@@ -1,5 +1,4 @@
-from msteams_webhooks import containers
-from msteams_webhooks import elements
+from msteams_webhooks import containers, elements
 from msteams_webhooks.actions import OpenURLAction
 
 
