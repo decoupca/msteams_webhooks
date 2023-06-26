@@ -11,7 +11,7 @@ from msteams_webhooks.containers import (
     TableCell,
     TableRow,
 )
-from msteams_webhooks.elements import Image, Media, MediaSource, TextBlock
+from msteams_webhooks.elements import Image, TextBlock
 
 
 def test_action_set() -> None:
@@ -147,25 +147,10 @@ def test_image_set() -> None:
                 "url": "https://adaptivecards.io/content/cats/1.png",
                 "altText": "Cat",
             },
-            {
-                "type": "Image",
-                "url": "https://adaptivecards.io/content/cats/1.png",
-                "altText": "Cat",
-            },
-            {
-                "type": "Image",
-                "url": "https://adaptivecards.io/content/cats/1.png",
-                "altText": "Cat",
-            },
-            {
-                "type": "Image",
-                "url": "https://adaptivecards.io/content/cats/1.png",
-                "altText": "Cat",
-            },
         ],
     }
     image = Image(url="https://adaptivecards.io/content/cats/1.png", alt_text="Cat")
-    image_set = ImageSet(images=[image, image, image, image, image, image])
+    image_set = ImageSet(images=[image, image, image])
     assert image_set.serialize() == payload
 
 
