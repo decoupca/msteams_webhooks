@@ -74,8 +74,7 @@ class TeamsWebhook:
             wrap=wrap,
             style=style,
         )
-        card = AdaptiveCard(body=[text_block])
-        self.send_card(card=card)
+        self.send_card(card=AdaptiveCard(body=[text_block]))
 
 
 __all__ = (
