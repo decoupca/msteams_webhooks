@@ -56,14 +56,13 @@ class TeamsWebhook:
         max_lines: Optional[int] = None,
         size: Optional[types.FontSizes] = None,
         weight: Optional[types.FontWeights] = None,
-        wrap: Optional[bool] = None,
         style: Optional[types.TextBlockStyles] = None,
+        wrap: bool = True,
     ) -> None:
         """Sends a basic message to the channel.
 
         Builds an Adaptive Card and adds a TextBlock element with provided info.
         """
-        card = AdaptiveCard()
         text_block = TextBlock(
             text=text,
             font_type=font_type,
@@ -75,7 +74,7 @@ class TeamsWebhook:
             wrap=wrap,
             style=style,
         )
-        card.body.append(text_block)
+        card = AdaptiveCard(body=[text_block])
         self.send_card(card=card)
 
 
