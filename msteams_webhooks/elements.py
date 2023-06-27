@@ -186,7 +186,7 @@ class MediaSource(CardElement):
 
     def serialize(self) -> dict[str, Any]:
         """Serialize object into data structure."""
-        payload = {"url": self.url}
+        payload: dict[str, Any] = {"url": self.url}
         if self.mime_type:
             payload["mimeType"] = self.mime_type
         return payload

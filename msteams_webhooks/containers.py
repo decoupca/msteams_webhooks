@@ -186,7 +186,7 @@ class Column(CardContainer):
 
     def serialize(self) -> dict[str, Any]:
         """Serialize object into data structure."""
-        payload = {"type": self.TYPE}
+        payload: dict[str, Any] = {"type": self.TYPE}
         if self.items:
             payload["items"] = [x.serialize() for x in self.items]
         if self.background_image:
@@ -257,7 +257,7 @@ class ColumnSet(CardContainer):
 
     def serialize(self) -> dict[str, Any]:
         """Serialize object into data structure."""
-        payload = {"type": self.TYPE}
+        payload: dict[str, Any] = {"type": self.TYPE}
         if self.columns:
             payload["columns"] = [x.serialize() for x in self.columns]
         if self.select_action:
@@ -530,7 +530,7 @@ class Table(CardContainer):
 
     def serialize(self) -> dict[str, Any]:
         """Serialize object into data structure."""
-        payload = {"type": self.TYPE}
+        payload: dict[str, Any] = {"type": self.TYPE}
         if self.columns:
             payload["columns"] = [x.serialize() for x in self.columns]
         if self.rows:
