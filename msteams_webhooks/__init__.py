@@ -5,8 +5,22 @@ from typing import Optional, Union
 import httpx
 
 from msteams_webhooks import types
+from msteams_webhooks.actions import Action, OpenURLAction
+from msteams_webhooks.buttons import OpenURLButton
 from msteams_webhooks.cards import AdaptiveCard, Card, HeroCard
-from msteams_webhooks.elements import TextBlock
+from msteams_webhooks.containers import (
+    ActionSet,
+    Column,
+    ColumnSet,
+    Container,
+    Fact,
+    FactSet,
+    ImageSet,
+    Table,
+    TableCell,
+    TableRow,
+)
+from msteams_webhooks.elements import Image, Media, MediaSource, TextBlock
 from msteams_webhooks.exceptions import TeamsRateLimitError, TeamsWebhookError
 
 
@@ -121,8 +135,24 @@ class TeamsWebhook:
 
 
 __all__ = (
-    "TeamsWebhook",
+    "Action",
+    "ActionSet",
     "AdaptiveCard",
+    "Column",
+    "ColumnSet",
+    "Container",
+    "Fact",
+    "FactSet",
     "HeroCard",
+    "Image",
+    "ImageSet",
+    "Media",
+    "MediaSource",
+    "OpenURLAction",
+    "OpenURLButton",
+    "Table",
+    "TableCell",
+    "TableRow",
+    "TeamsWebhook",
     "TextBlock",
 )

@@ -2,14 +2,11 @@
 from typing import Any
 
 from msteams_webhooks import types
+from msteams_webhooks.base import Entity
 
 
-class Button:
+class Button(Entity):
     """Base button class."""
-
-    def serialize(self) -> dict:
-        """Serialize object into data structure."""
-        return {}
 
 
 class OpenURLButton(Button):

@@ -3,15 +3,12 @@ from typing import Any, Optional, Union
 
 from msteams_webhooks import types
 from msteams_webhooks.actions import Action
+from msteams_webhooks.base import Entity
 from msteams_webhooks.elements import CardElement, Image
 
 
-class CardContainer:
+class CardContainer(Entity):
     """Base container class."""
-
-    def serialize(self) -> dict[str, Any]:
-        """Serialize object into data structure."""
-        return {}
 
 
 class ActionSet(CardContainer):

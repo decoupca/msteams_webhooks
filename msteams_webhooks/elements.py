@@ -3,14 +3,11 @@ from typing import Any, Literal, Optional, Union
 
 from msteams_webhooks import types
 from msteams_webhooks.actions import Action
+from msteams_webhooks.base import Entity
 
 
-class CardElement:
+class CardElement(Entity):
     """Base element class."""
-
-    def serialize(self) -> dict[str, Any]:
-        """Serialize object into data structure."""
-        return {}
 
 
 class TextBlock(CardElement):

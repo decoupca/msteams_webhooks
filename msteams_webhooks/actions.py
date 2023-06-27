@@ -2,14 +2,11 @@
 from typing import Any, Optional
 
 from msteams_webhooks import types
+from msteams_webhooks.base import Entity
 
 
-class Action:
+class Action(Entity):
     """Base action class."""
-
-    def serialize(self) -> dict[str, Any]:
-        """Serialize object into data structure."""
-        return {}
 
 
 class OpenURLAction(Action):

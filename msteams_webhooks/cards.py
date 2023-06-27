@@ -3,17 +3,14 @@ from typing import Any, Optional, Union
 
 from msteams_webhooks import types
 from msteams_webhooks.actions import Action
+from msteams_webhooks.base import Entity
 from msteams_webhooks.buttons import Button
 from msteams_webhooks.containers import CardContainer
 from msteams_webhooks.elements import CardElement
 
 
-class Card:
+class Card(Entity):
     """Base card class."""
-
-    def serialize(self) -> dict[str, Any]:
-        """Serialize object into data structure."""
-        return {}
 
 
 class AdaptiveCard(Card):
