@@ -1,3 +1,4 @@
+"""msteams_webhooks.types."""
 from typing import Literal, NewType, Union
 
 URL = NewType("URL", str)

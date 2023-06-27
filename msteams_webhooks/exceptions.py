@@ -1,4 +1,4 @@
-"""msteams_webhooks.exceptions"""
+"""msteams_webhooks.exceptions."""
 
 
 class TeamsWebhookError(Exception):

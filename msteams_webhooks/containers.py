@@ -1,4 +1,4 @@
-"""msteams_webhooks.containers"""
+"""msteams_webhooks.containers."""
 from typing import Any, Optional, Union
 
 from msteams_webhooks import types
@@ -23,6 +23,17 @@ class ActionSet(CardContainer):
     TYPE = "ActionSet"
 
     def __init__(self, actions: list[Action]) -> None:
+        """Displays a set of actions.
+
+        Args:
+            actions: List of ``Action`` elements to show.
+
+        Returns:
+            None.
+
+        Raises:
+            N/A
+        """
         self.actions = actions
 
     def serialize(self) -> dict[str, Any]:
@@ -50,6 +61,32 @@ class Container(CardContainer):
         min_height: Optional[str] = None,
         rtl: Optional[bool] = None,
     ) -> None:
+        """Containers group items together.
+
+        Args:
+            items: The card elements to render inside the ``Container``.
+            select_action: An ``Action`` that will be invoked when the ``Container`` is
+                tapped or selected. Action.ShowCard is not supported.
+            style: Style hint for ``Container``.
+            vertical_content_alignment: Defines how the content should be aligned
+                vertically within the container. When not specified, the value of
+                vertical_content_alignment is inherited from the parent container. If no
+                parent container has verticalContentAlignment set, it defaults to Top.
+            bleed: Determines whether the element should bleed through its parent`s padding.
+            background_image: Specifies the background image. Acceptable formats are PNG,
+                JPEG, and GIF.
+            min_height: Specifies the minimum height of the container in pixels, like "80px".
+            rtl: When true content in this container should be presented right to left. When
+                'false' content in this container should be presented left to right. When unset
+                layout direction will inherit from parent container or column. If unset in all
+                ancestors, the default platform behavior will apply.
+
+        Returns:
+            None.
+
+        Raises:
+            N/A
+        """
         self.items = items
         self.select_action = select_action
         self.style = style
@@ -60,6 +97,7 @@ class Container(CardContainer):
         self.rtl = rtl
 
     def serialize(self) -> dict[str, Any]:
+        """Serialize object into data structure."""
         payload = {
             "type": self.TYPE,
             "items": [x.serialize() for x in self.items],
@@ -82,7 +120,7 @@ class Container(CardContainer):
 
 
 class Column(CardContainer):
-    """Column, element of a ColumnSet.
+    """Column, element of a ColumnSet or column in a table.
 
     https://adaptivecards.io/explorer/Column.html
     """
@@ -103,6 +141,37 @@ class Column(CardContainer):
         vertical_content_alignment: Optional[types.VerticalAlignmentTypes] = None,
         width: Optional[types.ColumnWidthTypes] = None,
     ) -> None:
+        """Defines a container that is part of a ``ColumnSet``.
+
+        Args:
+            items: The card elements to render inside the ``Column``.
+            background_image: Specifies the background image. Acceptable formats are
+                PNG, JPEG, and GIF.
+            bleed: Determines whether the column should bleed through its parent`s padding.
+            min_height: Specifies the minimum height of the column in pixels, like "80px".
+            rtl: When true content in this column should be presented right to left. When
+                ``False`` content in this column should be presented left to right. When
+                unset layout direction will inherit from parent container or column. If unset
+                in all ancestors, the default platform behavior will apply.
+            separator: When ``True``, draw a separating line between this column and the previous
+                column.
+            spacing: Controls the amount of spacing between this column and the preceding column.
+            select_action: An ``Action`` that will be invoked when the ``Column`` is tapped or
+                selected. Action.ShowCard is not supported.
+            style: Style hint for ``Column``.
+            vertical_content_alignment: Defines how the content should be aligned vertically within
+                the column. When not specified, the value of verticalContentAlignment is inherited
+                from the parent container. If no parent container has verticalContentAlignment set,
+                it defaults to Top.
+            width: "auto", "stretch", a number representing relative width of the column in the
+                column group, or in version 1.1 and higher, a specific pixel width, like "50px".
+
+        Returns:
+            None.
+
+        Raises:
+            N/A
+        """
         self.items = items
         self.background_image = background_image
         self.bleed = bleed
@@ -116,6 +185,7 @@ class Column(CardContainer):
         self.width = width
 
     def serialize(self) -> dict[str, Any]:
+        """Serialize object into data structure."""
         payload = {"type": self.TYPE}
         if self.items:
             payload["items"] = [x.serialize() for x in self.items]
@@ -159,6 +229,25 @@ class ColumnSet(CardContainer):
         min_height: Optional[str] = None,
         horizontal_alignment: Optional[types.HorizontalAlignmentTypes] = None,
     ) -> None:
+        """``ColumnSet`` divides a region into ``Columns``, allowing elements to sit side-by-side.
+
+        Args:
+            columns: The list of ``Columns`` to divide the region into.
+            select_action: 	An ``Action`` that will be invoked when the ColumnSet is tapped
+                or selected. Action.ShowCard is not supported.
+            style: Style hint for ``ColumnSet``.
+            bleed: Determines whether the element should bleed through its parent's padding.
+            min_height: Specifies the minimum height of the column set in pixels, like "80px".
+            horizontal_alignment: Controls the horizontal alignment of the ColumnSet. When not
+                specified, the value of horizontalAlignment is inherited from the parent container.
+                If no parent container has horizontalAlignment set, it defaults to Left.
+
+        Returns:
+            None.
+
+        Raises:
+            N/A
+        """
         self.columns = columns
         self.select_action = select_action
         self.style = style
@@ -167,6 +256,7 @@ class ColumnSet(CardContainer):
         self.horizontal_alignment = horizontal_alignment
 
     def serialize(self) -> dict[str, Any]:
+        """Serialize object into data structure."""
         payload = {"type": self.TYPE}
         if self.columns:
             payload["columns"] = [x.serialize() for x in self.columns]
@@ -190,10 +280,23 @@ class Fact(CardContainer):
     """
 
     def __init__(self, title: str, value: str) -> None:
+        """Describes a Fact in a FactSet as a key/value pair.
+
+        Args:
+            title: The title of the fact.
+            value: The value of the fact.
+
+        Returns:
+            None.
+
+        Raises:
+            N/A
+        """
         self.title = title
         self.value = value
 
     def serialize(self) -> dict[str, Any]:
+        """Serialize object into data structure."""
         return {"title": self.title, "value": self.value}
 
 
@@ -206,9 +309,21 @@ class FactSet(CardContainer):
     TYPE = "FactSet"
 
     def __init__(self, facts: list[Fact]) -> None:
+        """Displays a series of facts (i.e. name/value pairs) in a tabular form.
+
+        Args:
+            facts: The list of ``Fact`` elements to show.
+
+        Returns:
+            None.
+
+        Raises:
+            N/A
+        """
         self.facts = facts
 
     def serialize(self) -> dict[str, Any]:
+        """Serialize object into data structure."""
         return {
             "type": self.TYPE,
             "facts": [x.serialize() for x in self.facts],
@@ -229,10 +344,27 @@ class ImageSet(CardContainer):
         *,
         image_size: Optional[types.ImageSizeTypes] = None,
     ) -> None:
+        """Displays a collection of Images similar to a gallery.
+
+        Acceptable formats are PNG, JPEG, and GIF.
+
+        Args:
+            images: The list of ``Image`` elements to show.
+            image_size: Controls the approximate size of each image. The physical
+                dimensions will vary per host. Auto and stretch are not supported for
+                ImageSet. The size will default to medium if those values are set.
+
+        Returns:
+            None.
+
+        Raises:
+            N/A
+        """
         self.images = images
         self.image_size = image_size
 
     def serialize(self) -> dict[str, Any]:
+        """Serialize object into data structure."""
         payload = {
             "type": self.TYPE,
             "images": [x.serialize() for x in self.images],
@@ -262,6 +394,32 @@ class TableCell(CardContainer):
         min_height: Optional[str] = None,
         rtl: Optional[bool] = None,
     ) -> None:
+        """Represents a cell within a row of a ``Table`` element.
+
+        Args:
+            items: The card elements to render inside the ``TableCell``.
+            select_action: An Action that will be invoked when the ``TableCell`` is tapped
+                or selected. Action.ShowCard is not supported.
+            style: Style hint for ``TableCell``.
+            vertical_content_alignment: Defines how the content should be aligned vertically
+                within the container. When not specified, the value of vertical_content_alignment
+                is inherited from the parent container. If no parent container has
+                vertical_content_alignment set, it defaults to Top.
+            bleed: Determines whether the element should bleed through its parent's padding.
+            background_image: Specifies the background image. Acceptable formats are PNG, JPEG,
+                and GIF.
+            min_height: Specifies the minimum height of the container in pixels, like "80px".
+            rtl: When true content in this container should be presented right to left. When 'false'
+                content in this container should be presented left to right. When unset layout
+                direction will inherit from parent container or column. If unset in all ancestors,
+                the default platform behavior will apply.
+
+        Returns:
+            None.
+
+        Raises:
+            N/A
+        """
         self.items = items
         self.select_action = select_action
         self.style = style
@@ -272,6 +430,7 @@ class TableCell(CardContainer):
         self.rtl = rtl
 
     def serialize(self) -> dict[str, Any]:
+        """Serialize object into data structure."""
         payload = {
             "type": self.TYPE,
             "items": [x.serialize() for x in self.items],
@@ -303,10 +462,23 @@ class TableRow(CardContainer):
         cells: list[TableCell],
         style: Optional[types.ContainerStyleTypes] = None,
     ) -> None:
+        """Organizes cells into a row for a ``Table``.
+
+        Args:
+            cells: List of ``TableCells`` to include in the row.
+            style: Style hint for ``TableRow``.
+
+        Returns:
+            None.
+
+        Raises:
+            N/A
+        """
         self.cells = cells
         self.style = style
 
     def serialize(self) -> dict[str, Any]:
+        """Serialize object into data structure."""
         payload = {"type": self.TYPE, "cells": [x.serialize() for x in self.cells]}
         if self.style:
             payload["style"] = self.style
@@ -331,6 +503,23 @@ class Table(CardContainer):
         horizontal_cell_content_alignment: Optional[types.HorizontalAlignmentTypes] = None,
         vertical_cell_content_alignment: Optional[types.VerticalAlignmentTypes] = None,
     ) -> None:
+        """Provides a way to display data in a tabular form.
+
+        Args:
+            columns: List of ``Column`` elements to include.
+            rows: List of ``TableRow`` elements to include.
+            first_row_as_headers: Specifies whether the first row of the table should be treated
+                as a header row, and be announced as such by accessibility software.
+            show_grid_lines: Specifies whether grid lines should be displayed.
+            grid_style: Defines the style of the grid. This property currently only controls the
+                grid's color.
+            horizontal_cell_content_alignment: Controls how the content of all cells is horizontally
+                aligned by default. When not specified, horizontal alignment is defined on a
+                per-cell basis.
+            vertical_cell_content_alignment: Controls how the content of all cells is vertically
+                aligned by default. When not specified, vertical alignment is defined on a per-cell
+                basis.
+        """
         self.columns = columns
         self.rows = rows
         self.first_row_as_headers = first_row_as_headers
@@ -340,6 +529,7 @@ class Table(CardContainer):
         self.vertical_cell_content_alignment = vertical_cell_content_alignment
 
     def serialize(self) -> dict[str, Any]:
+        """Serialize object into data structure."""
         payload = {"type": self.TYPE}
         if self.columns:
             payload["columns"] = [x.serialize() for x in self.columns]
