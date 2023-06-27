@@ -1,5 +1,5 @@
-"""msteams_webhooks.cards"""
-from typing import Optional, Union, Any
+"""msteams_webhooks.cards."""
+from typing import Any, Optional, Union
 
 from msteams_webhooks import types
 from msteams_webhooks.actions import Action
@@ -60,6 +60,12 @@ class AdaptiveCard(Card):
                 SSML fragment.
             lang: The 2-letter ISO-639-1 language used in the card. Used to localize any
                 date/time functions.
+
+        Returns:
+            None.
+
+        Raises:
+            N/A
         """
         self.version = version or "1.6"
         self.body = body or []
@@ -71,7 +77,8 @@ class AdaptiveCard(Card):
         self.lang = lang
         self.vertical_content_alignment = vertical_content_alignment
 
-    def serialize(self) -> dict:
+    def serialize(self) -> dict[str, Any]:
+        """Serialize object into data structure."""
         payload = {
             "contentType": "application/vnd.microsoft.card.adaptive",
             "content": {
@@ -99,11 +106,12 @@ class AdaptiveCard(Card):
         return payload
 
 
-class ConnectorCard(Card):
-    pass
-
-
 class HeroCard(Card):
+    """Hero Card.
+
+    A card that typically contains a single large image, one or more buttons, and text.
+    """
+
     TYPE = "application/vnd.microsoft.card.hero"
 
     def __init__(
@@ -115,13 +123,29 @@ class HeroCard(Card):
         images: Optional[list[types.URL]] = None,
         buttons: Optional[list[Button]] = None,
     ) -> None:
+        """Display a single large image, one or more buttons, and text.
+
+        Args:
+            title: Main text to display.
+            text: Text to display. A subset of markdown is supported (https://aka.ms/ACTextFeatures)
+            subtitle: Sub-title to display under `title`.
+            images: List of image URLs to display.
+            buttons: List of buttons to include in the card.
+
+        Returns:
+            None.
+
+        Raises:
+            N/A
+        """
         self.title = title
         self.text = text
         self.subtitle = subtitle
         self.images = images
         self.buttons = buttons
 
-    def serialize(self) -> dict:
+    def serialize(self) -> dict[str, Any]:
+        """Serialize object into data structure."""
         payload = {"contentType": self.TYPE, "content": {}}
         payload["content"]["title"] = self.title
         payload["content"]["text"] = self.text
@@ -132,15 +156,3 @@ class HeroCard(Card):
         if self.buttons:
             payload["content"]["buttons"] = [x.serialize() for x in self.buttons]
         return payload
-
-
-class ListCard(Card):
-    pass
-
-
-class ReceiptCard(Card):
-    pass
-
-
-class ThumbnailCard(Card):
-    pass
