@@ -60,6 +60,9 @@ class AdaptiveCard(Card):
                 SSML fragment.
             lang: The 2-letter ISO-639-1 language used in the card. Used to localize any
                 date/time functions.
+            vertical_content_alignment: Defines how the content should be aligned vertically
+                within the container. Only relevant for fixed-height cards, or cards with a
+                `min_height` specified.
 
         Returns:
             None.
