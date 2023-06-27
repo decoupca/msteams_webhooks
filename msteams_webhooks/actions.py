@@ -7,7 +7,7 @@ from msteams_webhooks import types
 class Action:
     """Base action class."""
 
-    def serialize(self) -> dict:
+    def serialize(self) -> dict[str, Any]:
         """Serialize object into data structure."""
         return {}
 
@@ -34,7 +34,6 @@ class OpenURLAction(Action):
             url: The URL to open.
             title: Label for button or link that represents this action.
 
-
         Returns:
             None.
 
@@ -46,7 +45,7 @@ class OpenURLAction(Action):
 
     def serialize(self) -> dict[str, Any]:
         """Serialize object into data structure."""
-        payload = {
+        payload: dict[str, Any] = {
             "type": "Action.OpenUrl",
             "url": self.url,
         }

@@ -1,16 +1,7 @@
 from msteams_webhooks.actions import OpenURLAction
-from msteams_webhooks.containers import (
-    ActionSet,
-    Column,
-    ColumnSet,
-    Container,
-    Fact,
-    FactSet,
-    ImageSet,
-    Table,
-    TableCell,
-    TableRow,
-)
+from msteams_webhooks.containers import (ActionSet, Column, ColumnSet,
+                                         Container, Fact, FactSet, ImageSet,
+                                         Table, TableCell, TableRow)
 from msteams_webhooks.elements import Image, TextBlock
 
 
