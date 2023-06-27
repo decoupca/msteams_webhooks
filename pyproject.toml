@@ -32,9 +32,6 @@ Source = "https://github.com/decoupca/msteams_webhooks"
 [tool.hatch.version]
 path = "msteams_webhooks/__version__.py"
 
-[tool.isort]
-profile = "black"
-
 [tool.black]
 line_length = 100
 
