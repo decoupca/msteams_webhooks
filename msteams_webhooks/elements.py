@@ -125,8 +125,7 @@ class Image(CardElement):
         """Displays an image. Acceptable formats are PNG, JPEG, and GIF.
 
         Args:
-        ----
-            url: The URL to the image. Supports data URI in version 1.2+
+            url: The URL to the image. Supports data URI in version 1.2+.
             alt_text: Alternate text describing the image.
             background_color: Applies a background to a transparent image.
                 This property will respect the image style.
@@ -146,7 +145,6 @@ class Image(CardElement):
                 This overrides the size property.
 
         Returns:
-        -------
             None.
 
         Raises:

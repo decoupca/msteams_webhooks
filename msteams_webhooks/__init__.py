@@ -1,3 +1,4 @@
+"""msteams_webhooks."""
 import ssl
 from typing import Optional, Union
 
@@ -10,6 +11,11 @@ from msteams_webhooks.exceptions import TeamsRateLimitError, TeamsWebhookError
 
 
 class TeamsWebhook:
+    """Core webhook class.
+
+    Dispatches messages to webhook URL.
+    """
+
     def __init__(
         self,
         url: types.URL,
@@ -17,6 +23,20 @@ class TeamsWebhook:
         verify: Union[str, bool, ssl.SSLContext] = True,
         timeout: float = 15.0,
     ) -> None:
+        """Construct webhook object.
+
+        Args:
+            url: Teams webhook URL to send all cards (messages) to.
+            verify: How to handle HTTPS certificate verification.
+            timeout: Global timeout in seconds for all HTTP operations.
+                May be further tuned with an ``httpx.Timeout`` object.
+
+        Returns:
+            None.
+
+        Raises:
+            N/A
+        """
         self.url = url
         self.client = httpx.Client(verify=verify, timeout=timeout)
         self.response = None
@@ -25,15 +45,12 @@ class TeamsWebhook:
         """Sends a card to the channel.
 
         Args:
-        ----
-            card: The ``Card`` to send.
+            card: The ``Card`` to send. Only one card may be sent at a time.
 
         Returns:
-        -------
             None.
 
         Raises:
-        ------
             TeamsWebhookError if the response was anything other than 200/OK.
             TeamsRateLimitError if "429" was found inside the response body.
         """
@@ -68,7 +85,6 @@ class TeamsWebhook:
         element to its body, with optional formatting.
 
         Args:
-        ----
             text: Text to display. A subset of markdown is supported (https://aka.ms/ACTextFeatures)
             color: Controls the color of TextBlock elements.
             font_type: Type of font to use for rendering.
@@ -85,11 +101,9 @@ class TeamsWebhook:
             style: The style of this TextBlock for accessibility purposes.
 
         Returns:
-        -------
             None.
 
         Raises:
-        ------
             N/A
         """
         text_block = TextBlock(
