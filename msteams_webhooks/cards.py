@@ -1,4 +1,5 @@
-from typing import Optional, Union
+"""msteams_webhooks.cards"""
+from typing import Optional, Union, Any
 
 from msteams_webhooks import types
 from msteams_webhooks.actions import Action
@@ -8,14 +9,22 @@ from msteams_webhooks.elements import CardElement
 
 
 class Card:
+    """Base card class."""
+
     TYPE = ""
     SCHEMA = ""
 
-    def serialize(self) -> dict:
+    def serialize(self) -> dict[str, Any]:
+        """Serialize object into data structure."""
         return {}
 
 
 class AdaptiveCard(Card):
+    """Adaptive Card.
+
+    https://adaptivecards.io/explorer/AdaptiveCard.html
+    """
+
     TYPE = "AdaptiveCard"
     SCHEMA = "http://adaptivecards.io/schemas/adaptive-card.json"
 
@@ -24,9 +33,43 @@ class AdaptiveCard(Card):
         *,
         body: Optional[list[Union[CardElement, CardContainer]]] = None,
         actions: Optional[list[Action]] = None,
+        version: Optional[str] = None,
+        background_image: Optional[types.URL] = None,
+        min_height: Optional[str] = None,
+        rtl: Optional[bool] = None,
+        speak: Optional[str] = None,
+        lang: Optional[str] = None,
+        vertical_content_alignment: Optional[types.VerticalAlignmentTypes] = None,
     ) -> None:
+        """An Adaptive Card, containing a free-form body of card elements, and an
+        optional set of actions.
+
+        Args:
+            body: The card elements to show in the primary card region.
+            actions: The Actions to show in the card's action bar.
+            version: Schema version that this card requires. If a client is lower than
+                this version, the fallbackText will be rendered. NOTE: Version is not
+                required for cards within an ``Action.ShowCard``. However, it is required
+                for the top-level card.
+            background_image: Specifies the background image of the card.
+            min_height: Specifies the minimum height of the card.
+            rtl: When true content in this Adaptive Card should be presented right to left.
+                When ``False`` content in this Adaptive Card should be presented left to right.
+                If unset, the default platform behavior will apply.
+            speak: Specifies what should be spoken for this entire card. This is simple text or
+                SSML fragment.
+            lang: The 2-letter ISO-639-1 language used in the card. Used to localize any
+                date/time functions.
+        """
+        self.version = version or "1.6"
         self.body = body or []
         self.actions = actions or []
+        self.background_image = background_image
+        self.min_height = min_height
+        self.rtl = rtl
+        self.speak = speak
+        self.lang = lang
+        self.vertical_content_alignment = vertical_content_alignment
 
     def serialize(self) -> dict:
         payload = {
@@ -34,13 +77,25 @@ class AdaptiveCard(Card):
             "content": {
                 "$schema": self.SCHEMA,
                 "type": self.TYPE,
-                "version": "1.5",
+                "version": self.version,
             },
         }
         if self.body:
             payload["content"]["body"] = [x.serialize() for x in self.body]
         if self.actions:
             payload["content"]["actions"] = [x.serialize() for x in self.actions]
+        if self.background_image:
+            payload["content"]["backgroundImage"] = self.background_image
+        if self.min_height:
+            payload["content"]["minHeight"] = self.min_height
+        if self.rtl is not None:
+            payload["content"]["rtl"] = self.rtl
+        if self.speak:
+            payload["content"]["speak"] = self.speak
+        if self.lang:
+            payload["content"]["lang"] = self.lang
+        if self.vertical_content_alignment:
+            payload["content"]["verticalContentAlignment"] = self.vertical_content_alignment
         return payload
 
 
