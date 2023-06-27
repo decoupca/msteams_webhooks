@@ -9,3 +9,9 @@ nox.options.default_venv_backend = "venv"
 def unit_tests(session) -> None:
     session.install(".", "pytest")
     session.run("pytest")
+
+
+@nox.session
+def linting(session) -> None:
+    session.install(".", "ruff")
+    session.run("ruff", "check", "msteams_webhooks")

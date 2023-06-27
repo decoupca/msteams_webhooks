@@ -41,8 +41,7 @@ class AdaptiveCard(Card):
         lang: Optional[str] = None,
         vertical_content_alignment: Optional[types.VerticalAlignmentTypes] = None,
     ) -> None:
-        """An Adaptive Card, containing a free-form body of card elements, and an
-        optional set of actions.
+        """An Adaptive Card, containing a free-form body of card elements.
 
         Args:
             body: The card elements to show in the primary card region.

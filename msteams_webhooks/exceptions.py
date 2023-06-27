@@ -1,3 +1,6 @@
+"""msteams_webhooks.exceptions"""
+
+
 class TeamsWebhookError(Exception):
     """Generic error."""
 
