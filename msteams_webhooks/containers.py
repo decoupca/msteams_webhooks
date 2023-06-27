@@ -10,6 +10,7 @@ class CardContainer:
     """Base container class."""
 
     def serialize(self) -> dict[str, Any]:
+        """Serialize object into data structure."""
         return {}
 
 
@@ -25,6 +26,7 @@ class ActionSet(CardContainer):
         self.actions = actions
 
     def serialize(self) -> dict[str, Any]:
+        """Serialize object into data structure."""
         return {"type": self.TYPE, "actions": [x.serialize() for x in self.actions]}
 
 
