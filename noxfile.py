@@ -11,7 +11,8 @@ def unit_tests(session) -> None:
     session.run("pytest")
 
 
-@nox.session
+@nox.session(python="3.11")
 def linting(session) -> None:
     session.install(".", "ruff")
-    session.run("ruff", "check", "msteams_webhooks")
+    session.run("ruff", "check", "msteams_webhooks/")
+    session.run("black", "--check", "msteams_webhooks/")
