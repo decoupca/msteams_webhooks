@@ -148,7 +148,7 @@ class HeroCard(Card):
 
     def serialize(self) -> dict[str, Any]:
         """Serialize object into data structure."""
-        payload = {"contentType": self.TYPE, "content": {}}
+        payload: dict[str, Any] = {"contentType": self.TYPE, "content": {}}
         payload["content"]["title"] = self.title
         payload["content"]["text"] = self.text
         if self.subtitle:
