@@ -1,5 +1,5 @@
 """msteams_webhooks.elements."""
-from typing import Any, ClassVar, Literal, Optional, Union
+from typing import Any, Literal, Optional, Union
 
 from msteams_webhooks import types
 from msteams_webhooks.actions import Action
@@ -9,15 +9,10 @@ class CardElement:
     """Base element class."""
 
     TYPE = ""
-    ATTR_MAP = None
 
     def serialize(self) -> dict[str, Any]:
         """Serialize object into data structure."""
-        payload = {"type": self.TYPE}
-        for attr, key in self.ATTR_MAP.items():
-            if (value := getattr(self, attr)) and value is not None:
-                payload[key] = value
-        return payload
+        return {}
 
 
 class TextBlock(CardElement):
@@ -27,18 +22,6 @@ class TextBlock(CardElement):
     """
 
     TYPE = "TextBlock"
-    ATTR_MAP: ClassVar[dict[str, str]] = {
-        "text": "text",
-        "color": "color",
-        "font_type": "fontType",
-        "horizontal_alignment": "horizontalAlignment",
-        "is_subtle": "isSubtle",
-        "max_lines": "maxLines",
-        "size": "size",
-        "weight": "weight",
-        "wrap": "wrap",
-        "style": "style",
-    }
 
     def __init__(
         self,
@@ -89,6 +72,32 @@ class TextBlock(CardElement):
         self.wrap = wrap
         self.style = style
 
+    def serialize(self) -> dict[str, Any]:
+        """Serialize object into data structure."""
+        payload: dict[str, Any] = {
+            "type": self.TYPE,
+            "text": self.text,
+        }
+        if self.color:
+            payload["color"] = self.color
+        if self.font_type:
+            payload["fontType"] = self.font_type
+        if self.horizontal_alignment:
+            payload["horizontalAlignment"] = self.horizontal_alignment
+        if self.is_subtle:
+            payload["isSubtle"] = self.is_subtle
+        if self.max_lines:
+            payload["maxLines"] = self.max_lines
+        if self.size:
+            payload["size"] = self.size
+        if self.weight:
+            payload["weight"] = self.weight
+        if self.wrap:
+            payload["wrap"] = self.wrap
+        if self.style:
+            payload["style"] = self.style
+        return payload
+
 
 class Image(CardElement):
     """Image element.
@@ -97,17 +106,6 @@ class Image(CardElement):
     """
 
     TYPE = "Image"
-    ATTR_MAP: ClassVar[dict[str, str]] = {
-        "url": "url",
-        "alt_text": "altText",
-        "background_color": "backgroundColor",
-        "height": "height",
-        "horizontal_alignment": "horizontalAlignment",
-        "select_action": "selectAction",
-        "size": "size",
-        "style": "style",
-        "width": "width",
-    }
 
     def __init__(
         self,
@@ -159,6 +157,30 @@ class Image(CardElement):
         self.size = size
         self.style = style
         self.width = width
+
+    def serialize(self) -> dict[str, Any]:
+        """Serialize object into data structure."""
+        payload: dict[str, Any] = {
+            "type": self.TYPE,
+            "url": self.url,
+        }
+        if self.alt_text:
+            payload["altText"] = self.alt_text
+        if self.background_color:
+            payload["backgroundColor"] = self.background_color
+        if self.height:
+            payload["height"] = self.height
+        if self.horizontal_alignment:
+            payload["horizontalAlignment"] = self.horizontal_alignment
+        if self.select_action:
+            payload["selectAction"] = self.select_action.serialize()
+        if self.size:
+            payload["size"] = self.size
+        if self.style:
+            payload["style"] = self.style
+        if self.width:
+            payload["width"] = self.width
+        return payload
 
 
 class MediaSource(CardElement):
