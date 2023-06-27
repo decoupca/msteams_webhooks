@@ -20,8 +20,6 @@ class ActionSet(CardContainer):
     https://adaptivecards.io/explorer/ActionSet.html
     """
 
-    TYPE = "ActionSet"
-
     def __init__(self, actions: list[Action]) -> None:
         """Displays a set of actions.
 
@@ -38,7 +36,7 @@ class ActionSet(CardContainer):
 
     def serialize(self) -> dict[str, Any]:
         """Serialize object into data structure."""
-        return {"type": self.TYPE, "actions": [x.serialize() for x in self.actions]}
+        return {"type": "ActionSet", "actions": [x.serialize() for x in self.actions]}
 
 
 class Container(CardContainer):
@@ -46,8 +44,6 @@ class Container(CardContainer):
 
     https://adaptivecards.io/explorer/Container.html
     """
-
-    TYPE = "Container"
 
     def __init__(
         self,
@@ -99,7 +95,7 @@ class Container(CardContainer):
     def serialize(self) -> dict[str, Any]:
         """Serialize object into data structure."""
         payload = {
-            "type": self.TYPE,
+            "type": "Container",
             "items": [x.serialize() for x in self.items],
         }
         if self.select_action:
@@ -124,8 +120,6 @@ class Column(CardContainer):
 
     https://adaptivecards.io/explorer/Column.html
     """
-
-    TYPE = "Column"
 
     def __init__(
         self,
@@ -186,7 +180,7 @@ class Column(CardContainer):
 
     def serialize(self) -> dict[str, Any]:
         """Serialize object into data structure."""
-        payload: dict[str, Any] = {"type": self.TYPE}
+        payload: dict[str, Any] = {"type": "Column"}
         if self.items:
             payload["items"] = [x.serialize() for x in self.items]
         if self.background_image:
@@ -217,8 +211,6 @@ class ColumnSet(CardContainer):
 
     https://adaptivecards.io/explorer/ColumnSet.html
     """
-
-    TYPE = "ColumnSet"
 
     def __init__(
         self,
@@ -257,7 +249,7 @@ class ColumnSet(CardContainer):
 
     def serialize(self) -> dict[str, Any]:
         """Serialize object into data structure."""
-        payload: dict[str, Any] = {"type": self.TYPE}
+        payload: dict[str, Any] = {"type": "ColumnSet"}
         if self.columns:
             payload["columns"] = [x.serialize() for x in self.columns]
         if self.select_action:
@@ -306,8 +298,6 @@ class FactSet(CardContainer):
     https://adaptivecards.io/explorer/FactSet.html
     """
 
-    TYPE = "FactSet"
-
     def __init__(self, facts: list[Fact]) -> None:
         """Displays a series of facts (i.e. name/value pairs) in a tabular form.
 
@@ -325,7 +315,7 @@ class FactSet(CardContainer):
     def serialize(self) -> dict[str, Any]:
         """Serialize object into data structure."""
         return {
-            "type": self.TYPE,
+            "type": "FactSet",
             "facts": [x.serialize() for x in self.facts],
         }
 
@@ -335,8 +325,6 @@ class ImageSet(CardContainer):
 
     https://adaptivecards.io/explorer/ImageSet.html
     """
-
-    TYPE = "ImageSet"
 
     def __init__(
         self,
@@ -366,7 +354,7 @@ class ImageSet(CardContainer):
     def serialize(self) -> dict[str, Any]:
         """Serialize object into data structure."""
         payload = {
-            "type": self.TYPE,
+            "type": "ImageSet",
             "images": [x.serialize() for x in self.images],
         }
         if self.image_size:
@@ -379,8 +367,6 @@ class TableCell(CardContainer):
 
     https://adaptivecards.io/explorer/TableCell.html
     """
-
-    TYPE = "TableCell"
 
     def __init__(
         self,
@@ -432,7 +418,7 @@ class TableCell(CardContainer):
     def serialize(self) -> dict[str, Any]:
         """Serialize object into data structure."""
         payload = {
-            "type": self.TYPE,
+            "type": "TableCell",
             "items": [x.serialize() for x in self.items],
         }
         if self.select_action:
@@ -454,8 +440,6 @@ class TableCell(CardContainer):
 
 class TableRow(CardContainer):
     """TableRow."""
-
-    TYPE = "TableRow"
 
     def __init__(
         self,
@@ -479,7 +463,7 @@ class TableRow(CardContainer):
 
     def serialize(self) -> dict[str, Any]:
         """Serialize object into data structure."""
-        payload = {"type": self.TYPE, "cells": [x.serialize() for x in self.cells]}
+        payload = {"type": "TableRow", "cells": [x.serialize() for x in self.cells]}
         if self.style:
             payload["style"] = self.style
         return payload
@@ -490,8 +474,6 @@ class Table(CardContainer):
 
     https://adaptivecards.io/explorer/Table.html
     """
-
-    TYPE = "Table"
 
     def __init__(
         self,
@@ -530,7 +512,7 @@ class Table(CardContainer):
 
     def serialize(self) -> dict[str, Any]:
         """Serialize object into data structure."""
-        payload: dict[str, Any] = {"type": self.TYPE}
+        payload: dict[str, Any] = {"type": "Table"}
         if self.columns:
             payload["columns"] = [x.serialize() for x in self.columns]
         if self.rows:

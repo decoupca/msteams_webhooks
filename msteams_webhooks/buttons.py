@@ -15,8 +15,6 @@ class Button:
 class OpenURLButton(Button):
     """Open a URL."""
 
-    TYPE = "openUrl"
-
     def __init__(self, url: types.URL, title: str) -> None:
         """Open a URL.
 
@@ -35,4 +33,4 @@ class OpenURLButton(Button):
 
     def serialize(self) -> dict[str, Any]:
         """Serialize object into data structure."""
-        return {"type": self.TYPE, "title": self.title, "value": self.url}
+        return {"type": "openUrl", "title": self.title, "value": self.url}

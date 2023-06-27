@@ -11,9 +11,6 @@ from msteams_webhooks.elements import CardElement
 class Card:
     """Base card class."""
 
-    TYPE = ""
-    SCHEMA = ""
-
     def serialize(self) -> dict[str, Any]:
         """Serialize object into data structure."""
         return {}
@@ -24,9 +21,6 @@ class AdaptiveCard(Card):
 
     https://adaptivecards.io/explorer/AdaptiveCard.html
     """
-
-    TYPE = "AdaptiveCard"
-    SCHEMA = "http://adaptivecards.io/schemas/adaptive-card.json"
 
     def __init__(
         self,
@@ -40,6 +34,7 @@ class AdaptiveCard(Card):
         speak: Optional[str] = None,
         lang: Optional[str] = None,
         vertical_content_alignment: Optional[types.VerticalAlignmentTypes] = None,
+        schema: Optional[str] = None,
     ) -> None:
         """An Adaptive Card, containing a free-form body of card elements.
 
@@ -62,6 +57,7 @@ class AdaptiveCard(Card):
             vertical_content_alignment: Defines how the content should be aligned vertically
                 within the container. Only relevant for fixed-height cards, or cards with a
                 `min_height` specified.
+            schema: Card schema URL.
 
         Returns:
             None.
@@ -78,14 +74,15 @@ class AdaptiveCard(Card):
         self.speak = speak
         self.lang = lang
         self.vertical_content_alignment = vertical_content_alignment
+        self.schema = schema or "http://adaptivecards.io/schemas/adaptive-card.json"
 
     def serialize(self) -> dict[str, Any]:
         """Serialize object into data structure."""
         payload = {
             "contentType": "application/vnd.microsoft.card.adaptive",
             "content": {
-                "$schema": self.SCHEMA,
-                "type": self.TYPE,
+                "$schema": self.schema,
+                "type": "AdaptiveCard",
                 "version": self.version,
             },
         }
@@ -113,8 +110,6 @@ class HeroCard(Card):
 
     A card that typically contains a single large image, one or more buttons, and text.
     """
-
-    TYPE = "application/vnd.microsoft.card.hero"
 
     def __init__(
         self,
@@ -148,7 +143,10 @@ class HeroCard(Card):
 
     def serialize(self) -> dict[str, Any]:
         """Serialize object into data structure."""
-        payload: dict[str, Any] = {"contentType": self.TYPE, "content": {}}
+        payload: dict[str, Any] = {
+            "contentType": "application/vnd.microsoft.card.hero",
+            "content": {},
+        }
         payload["content"]["title"] = self.title
         payload["content"]["text"] = self.text
         if self.subtitle:

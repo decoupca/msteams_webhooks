@@ -8,8 +8,6 @@ from msteams_webhooks.actions import Action
 class CardElement:
     """Base element class."""
 
-    TYPE = ""
-
     def serialize(self) -> dict[str, Any]:
         """Serialize object into data structure."""
         return {}
@@ -20,8 +18,6 @@ class TextBlock(CardElement):
 
     https://adaptivecards.io/explorer/TextBlock.html
     """
-
-    TYPE = "TextBlock"
 
     def __init__(
         self,
@@ -75,7 +71,7 @@ class TextBlock(CardElement):
     def serialize(self) -> dict[str, Any]:
         """Serialize object into data structure."""
         payload: dict[str, Any] = {
-            "type": self.TYPE,
+            "type": "TextBlock",
             "text": self.text,
         }
         if self.color:
@@ -104,8 +100,6 @@ class Image(CardElement):
 
     https://adaptivecards.io/explorer/Image.html.
     """
-
-    TYPE = "Image"
 
     def __init__(
         self,
@@ -161,7 +155,7 @@ class Image(CardElement):
     def serialize(self) -> dict[str, Any]:
         """Serialize object into data structure."""
         payload: dict[str, Any] = {
-            "type": self.TYPE,
+            "type": "Image",
             "url": self.url,
         }
         if self.alt_text:
@@ -250,7 +244,7 @@ class Media(CardElement):
 
     def serialize(self) -> dict[str, Any]:
         """Serialize object into data structure."""
-        payload = {
+        payload: dict[str, Any] = {
             "type": "Media",
             "sources": [x.serialize() for x in self.sources],
         }
