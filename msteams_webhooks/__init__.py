@@ -26,7 +26,7 @@ class TeamsWebhook:
 
         Args:
         ----
-            card: The card to send.
+            card: The ``Card`` to send.
 
         Returns:
         -------
@@ -34,8 +34,8 @@ class TeamsWebhook:
 
         Raises:
         ------
-            TeamsWebhookError if the response was not 200/OK.
-            TeamsRateLimitError if 429 was found inside the response body.
+            TeamsWebhookError if the response was anything other than 200/OK.
+            TeamsRateLimitError if "429" was found inside the response body.
         """
         headers = {"Content-Type": "application/json"}
         # Even though the attachments key as a list implies that more than one card
@@ -47,7 +47,7 @@ class TeamsWebhook:
             raise TeamsWebhookError(self.response.text)
         if "429" in self.response.text:
             # Rate limit errors receive HTTP code 200 with 429 in response body.
-            raise TeamsRateLimitError("Exceeded message rate limit.")
+            raise TeamsRateLimitError("Rate limit exceeded. Slow messaging rate and try again.")
 
     def send_message(
         self,
@@ -62,9 +62,35 @@ class TeamsWebhook:
         style: Optional[types.TextBlockStyles] = None,
         wrap: bool = True,
     ) -> None:
-        """Sends a basic message to the channel.
+        """Sends a basic text message to the channel.
 
-        Builds an Adaptive Card and adds a TextBlock element with provided info.
+        Convenience method that builds an ``AdaptiveCard`` and adds a single ``TextBlock``
+        element to its body, with optional formatting.
+
+        Args:
+        ----
+            text: Text to display. A subset of markdown is supported (https://aka.ms/ACTextFeatures)
+            color: Controls the color of TextBlock elements.
+            font_type: Type of font to use for rendering.
+            horizontal_alignment: Controls the horizontal text alignment. When not specified,
+                the value of horizontalAlignment is inherited from the parent container. If no
+                parent container has horizontalAlignment set, it defaults to Left.
+            is_subtle: If true, displays text slightly toned down to appear less prominent.
+                Default: ``False``
+            max_lines: Specifies the maximum number of lines to display. `text` will be
+                clipped if it exceeds `max_lines`.
+            size: Controls size of text.
+            weight: Controls the weight of TextBlock elements.
+            wrap: If true, allow `text` to wrap. Otherwise, text is clipped. Default: False
+            style: The style of this TextBlock for accessibility purposes.
+
+        Returns:
+        -------
+            None.
+
+        Raises:
+        ------
+            N/A
         """
         text_block = TextBlock(
             text=text,

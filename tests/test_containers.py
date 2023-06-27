@@ -225,7 +225,10 @@ def test_table() -> None:
                         "items": [
                             {
                                 "type": "TextBlock",
-                                "text": "Defines the table's columns (number of columns, and column sizes).",
+                                "text": (
+                                    "Defines the table's columns (number of columns, "
+                                    "and column sizes)."
+                                ),
                                 "wrap": True,
                             },
                         ],
@@ -251,7 +254,12 @@ def test_table() -> None:
                         "items": [
                             {
                                 "type": "TextBlock",
-                                "text": "Defines the rows of the Table, each being a collection of cells. Rows are not required, which allows empty Tables to be generated via templating without breaking the rendering of the whole card.",
+                                "text": (
+                                    "Defines the rows of the Table, each being a collection "
+                                    "of cells. Rows are not required, which allows empty "
+                                    "Tables to be generated via templating without breaking "
+                                    "the rendering of the whole card."
+                                ),
                                 "wrap": True,
                             },
                         ],
@@ -281,13 +289,17 @@ def test_table() -> None:
                 cells=[
                     TableCell(style="good", items=[TextBlock(text="columns", wrap=True)]),
                     TableCell(
-                        style="warning", items=[TextBlock(text="ColumnDefinition[]", wrap=True)],
+                        style="warning",
+                        items=[TextBlock(text="ColumnDefinition[]", wrap=True)],
                     ),
                     TableCell(
                         style="accent",
                         items=[
                             TextBlock(
-                                text="Defines the table's columns (number of columns, and column sizes).",
+                                text=(
+                                    "Defines the table's columns (number of columns, "
+                                    "and column sizes)."
+                                ),
                                 wrap=True,
                             ),
                         ],
@@ -302,7 +314,12 @@ def test_table() -> None:
                         style="attention",
                         items=[
                             TextBlock(
-                                text="Defines the rows of the Table, each being a collection of cells. Rows are not required, which allows empty Tables to be generated via templating without breaking the rendering of the whole card.",
+                                text=(
+                                    "Defines the rows of the Table, each being a collection of "
+                                    "cells. Rows are not required, which allows empty Tables "
+                                    "to be generated via templating without breaking the "
+                                    "rendering of the whole card."
+                                ),
                                 wrap=True,
                             ),
                         ],

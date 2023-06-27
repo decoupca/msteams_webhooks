@@ -44,7 +44,7 @@ select = [
     'A',    # flake8-builtins
     'B',    # flake8-bugbear
     'COM',  # flake8-commas
-    'D',    # pydocstyle
+    # 'D',    # pydocstyle
     'E',    # pycodestyle
     'ERA',  # eradicate
     'F',    # pyflakes

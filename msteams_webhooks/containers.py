@@ -221,7 +221,10 @@ class ImageSet(CardContainer):
     TYPE = "ImageSet"
 
     def __init__(
-        self, images: list[Image], *, image_size: Optional[types.ImageSizeTypes] = None,
+        self,
+        images: list[Image],
+        *,
+        image_size: Optional[types.ImageSizeTypes] = None,
     ) -> None:
         self.images = images
         self.image_size = image_size
@@ -293,7 +296,9 @@ class TableRow(CardContainer):
     TYPE = "TableRow"
 
     def __init__(
-        self, cells: list[TableCell], style: Optional[types.ContainerStyleTypes] = None,
+        self,
+        cells: list[TableCell],
+        style: Optional[types.ContainerStyleTypes] = None,
     ) -> None:
         self.cells = cells
         self.style = style

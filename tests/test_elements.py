@@ -1,7 +1,9 @@
+"""Element unit tests."""
 from msteams_webhooks.elements import Image, Media, MediaSource, TextBlock
 
 
 def test_text_block() -> None:
+    """Text block element unit test."""
     payload = {
         "type": "TextBlock",
         "text": "Lorem ipsum dolor sit amet",
@@ -28,6 +30,7 @@ def test_text_block() -> None:
 
 
 def test_image() -> None:
+    """Image element unit test."""
     payload = {
         "type": "Image",
         "url": "https://adaptivecards.io/content/cats/1.png",
@@ -53,6 +56,7 @@ def test_image() -> None:
 
 
 def test_media() -> None:
+    """Media elements unit test."""
     payload = {
         "type": "Media",
         "sources": [

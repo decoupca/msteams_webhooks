@@ -1,16 +1,18 @@
-from typing import Any, Literal, Optional, Union
+"""Card elements."""
+from typing import Any, ClassVar, Literal, Optional, Union
 
 from msteams_webhooks import types
 from msteams_webhooks.actions import Action
 
 
 class CardElement:
-    """Base Element class."""
+    """Base element class."""
 
     TYPE = ""
-    ATTR_MAP = {}
+    ATTR_MAP = None
 
     def serialize(self) -> dict[str, Any]:
+        """Serialize object into data structure."""
         payload = {"type": self.TYPE}
         for attr, key in self.ATTR_MAP.items():
             if (value := getattr(self, attr)) and value is not None:
@@ -20,11 +22,12 @@ class CardElement:
 
 class TextBlock(CardElement):
     """TextBlock element.
-    https://adaptivecards.io/explorer/TextBlock.html.
+
+    https://adaptivecards.io/explorer/TextBlock.html
     """
 
     TYPE = "TextBlock"
-    ATTR_MAP = {
+    ATTR_MAP: ClassVar[dict[str, str]] = {
         "text": "text",
         "color": "color",
         "font_type": "fontType",
@@ -51,6 +54,30 @@ class TextBlock(CardElement):
         wrap: Optional[bool] = None,
         style: Optional[types.TextBlockStyles] = None,
     ) -> None:
+        """Displays text, allowing control over font sizes, weight, and color.
+
+        Args:
+            text: Text to display. A subset of markdown is supported (https://aka.ms/ACTextFeatures)
+            color: Controls the color of TextBlock elements.
+            font_type: Type of font to use for rendering.
+            horizontal_alignment: Controls the horizontal text alignment. When not specified,
+                the value of horizontalAlignment is inherited from the parent container. If no
+                parent container has horizontalAlignment set, it defaults to Left.
+            is_subtle: If true, displays text slightly toned down to appear less prominent.
+                Default: ``False``
+            max_lines: Specifies the maximum number of lines to display. `text` will be
+                clipped if it exceeds `max_lines`.
+            size: Controls size of text.
+            weight: Controls the weight of TextBlock elements.
+            wrap: If true, allow `text` to wrap. Otherwise, text is clipped. Default: False
+            style: The style of this TextBlock for accessibility purposes.
+
+        Returns:
+            None.
+
+        Raises:
+            N/A
+        """
         self.text = text
         self.color = color
         self.font_type = font_type
@@ -65,12 +92,12 @@ class TextBlock(CardElement):
 
 class Image(CardElement):
     """Image element.
-    https://adaptivecards.io/explorer/Image.html.
 
+    https://adaptivecards.io/explorer/Image.html.
     """
 
     TYPE = "Image"
-    ATTR_MAP = {
+    ATTR_MAP: ClassVar[dict[str, str]] = {
         "url": "url",
         "alt_text": "altText",
         "background_color": "backgroundColor",
@@ -95,6 +122,37 @@ class Image(CardElement):
         style: Optional[types.ImageStyleTypes] = None,
         width: Optional[str] = None,
     ) -> None:
+        """Displays an image. Acceptable formats are PNG, JPEG, and GIF.
+
+        Args:
+        ----
+            url: The URL to the image. Supports data URI in version 1.2+
+            alt_text: Alternate text describing the image.
+            background_color: Applies a background to a transparent image.
+                This property will respect the image style.
+            height: The desired height of the image. If specified as a pixel value,
+                ending in `px`, E.g., 50px, the image will distort to fit that exact
+                height. This overrides the size property.
+            horizontal_alignment: Controls how this element is horizontally positioned
+                within its parent. When not specified, the value of horizontalAlignment
+                is inherited from the parent container. If no parent container has
+                horizontalAlignment set, it defaults to Left.
+            select_action: An ``Action`` that will be invoked when the ``Image`` is tapped
+                or selected. ``Action.ShowCard`` is not supported.
+            size: Controls the approximate size of the image. The physical dimensions will
+                vary per host.
+            style: Controls how this ``Image`` is displayed.
+            width: The desired on-screen width of the image, ending in `px`. E.g., 50px.
+                This overrides the size property.
+
+        Returns:
+        -------
+            None.
+
+        Raises:
+        ------
+            N/A
+        """
         self.url = url
         self.alt_text = alt_text
         self.background_color = background_color
