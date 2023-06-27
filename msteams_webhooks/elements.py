@@ -1,4 +1,4 @@
-"""Card elements."""
+"""msteams_webhooks.elements."""
 from typing import Any, ClassVar, Literal, Optional, Union
 
 from msteams_webhooks import types
@@ -130,7 +130,7 @@ class Image(CardElement):
             background_color: Applies a background to a transparent image.
                 This property will respect the image style.
             height: The desired height of the image. If specified as a pixel value,
-                ending in `px`, E.g., 50px, the image will distort to fit that exact
+                ending in 'px', E.g., 50px, the image will distort to fit that exact
                 height. This overrides the size property.
             horizontal_alignment: Controls how this element is horizontally positioned
                 within its parent. When not specified, the value of horizontalAlignment
@@ -141,14 +141,13 @@ class Image(CardElement):
             size: Controls the approximate size of the image. The physical dimensions will
                 vary per host.
             style: Controls how this ``Image`` is displayed.
-            width: The desired on-screen width of the image, ending in `px`. E.g., 50px.
+            width: The desired on-screen width of the image, ending in 'px'. E.g., 50px.
                 This overrides the size property.
 
         Returns:
             None.
 
         Raises:
-        ------
             N/A
         """
         self.url = url
@@ -169,6 +168,19 @@ class MediaSource(CardElement):
     """
 
     def __init__(self, url: types.URL, *, mime_type: Optional[str] = None) -> None:
+        """Defines a source for a Media element.
+
+        Args:
+            url: URL to media. Supports data URI in version 1.2+
+            mime_type: Mime type of associated media (e.g. "video/mp4"). For YouTube
+                and other Web video URLs, mime_type can be omitted.
+
+        Returns:
+            None.
+
+        Raises:
+            N/A
+        """
         self.url = url
         self.mime_type = mime_type
 
@@ -193,11 +205,29 @@ class Media(CardElement):
         poster: Optional[types.URL] = None,
         alt_text: Optional[str] = None,
     ) -> None:
+        """Displays a media player for audio or video content.
+
+        Args:
+            sources: List of ``MediaSource`` elements to display.
+            poster: URL of an image to display before playing. Supports data URI in version 1.2+.
+                If poster is omitted, the Media element will either use a default poster
+                (controlled by the host application) or will attempt to automatically pull
+                the poster from the target video service when the source URL points to a
+                video from a Web provider such as YouTube.
+            alt_text: Alternate text describing the audio or video.
+
+        Returns:
+            None.
+
+        Raises:
+            N/A
+        """
         self.sources = sources
         self.poster = poster
         self.alt_text = alt_text
 
-    def serialize(self) -> dict:
+    def serialize(self) -> dict[str, Any]:
+        """Serialize object into data structure."""
         payload = {
             "type": "Media",
             "sources": [x.serialize() for x in self.sources],
