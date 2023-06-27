@@ -1,6 +1,5 @@
 import nox
 
-
 nox.options.error_on_missing_interpreters = False
 nox.options.stop_on_first_error = False
 nox.options.default_venv_backend = "venv"

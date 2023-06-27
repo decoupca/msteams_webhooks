@@ -18,7 +18,7 @@ def test_action_set() -> None:
     payload = {
         "type": "ActionSet",
         "actions": [
-            {"type": "Action.OpenUrl", "url": "https://example.com/", "title": "Example action"}
+            {"type": "Action.OpenUrl", "url": "https://example.com/", "title": "Example action"},
         ],
     }
     action = OpenURLAction(url="https://example.com/", title="Example action")
@@ -104,7 +104,7 @@ def test_column() -> None:
             Column(items=[col1_text, image]),
             Column(items=[col2_text, image]),
             Column(items=[col3_text, image]),
-        ]
+        ],
     )
     assert col_set.serialize() == payload
 
@@ -123,7 +123,7 @@ def test_facts() -> None:
             Fact(title="Fact 1", value="Value 1"),
             Fact(title="Fact 2", value="Value 2"),
             Fact(title="Fact 3", value="Value 3"),
-        ]
+        ],
     )
     assert fact_set.serialize() == payload
 
@@ -176,7 +176,7 @@ def test_table() -> None:
                                 "text": "Name",
                                 "wrap": True,
                                 "weight": "bolder",
-                            }
+                            },
                         ],
                     },
                     {
@@ -187,7 +187,7 @@ def test_table() -> None:
                                 "text": "Type",
                                 "wrap": True,
                                 "weight": "bolder",
-                            }
+                            },
                         ],
                     },
                     {
@@ -198,7 +198,7 @@ def test_table() -> None:
                                 "text": "Description",
                                 "wrap": True,
                                 "weight": "bolder",
-                            }
+                            },
                         ],
                     },
                 ],
@@ -216,7 +216,7 @@ def test_table() -> None:
                         "type": "TableCell",
                         "style": "warning",
                         "items": [
-                            {"type": "TextBlock", "text": "ColumnDefinition[]", "wrap": True}
+                            {"type": "TextBlock", "text": "ColumnDefinition[]", "wrap": True},
                         ],
                     },
                     {
@@ -227,7 +227,7 @@ def test_table() -> None:
                                 "type": "TextBlock",
                                 "text": "Defines the table's columns (number of columns, and column sizes).",
                                 "wrap": True,
-                            }
+                            },
                         ],
                     },
                 ],
@@ -253,7 +253,7 @@ def test_table() -> None:
                                 "type": "TextBlock",
                                 "text": "Defines the rows of the Table, each being a collection of cells. Rows are not required, which allows empty Tables to be generated via templating without breaking the rendering of the whole card.",
                                 "wrap": True,
-                            }
+                            },
                         ],
                     },
                 ],
@@ -281,7 +281,7 @@ def test_table() -> None:
                 cells=[
                     TableCell(style="good", items=[TextBlock(text="columns", wrap=True)]),
                     TableCell(
-                        style="warning", items=[TextBlock(text="ColumnDefinition[]", wrap=True)]
+                        style="warning", items=[TextBlock(text="ColumnDefinition[]", wrap=True)],
                     ),
                     TableCell(
                         style="accent",
@@ -289,7 +289,7 @@ def test_table() -> None:
                             TextBlock(
                                 text="Defines the table's columns (number of columns, and column sizes).",
                                 wrap=True,
-                            )
+                            ),
                         ],
                     ),
                 ],
@@ -304,10 +304,10 @@ def test_table() -> None:
                             TextBlock(
                                 text="Defines the rows of the Table, each being a collection of cells. Rows are not required, which allows empty Tables to be generated via templating without breaking the rendering of the whole card.",
                                 wrap=True,
-                            )
+                            ),
                         ],
                     ),
-                ]
+                ],
             ),
         ],
     )

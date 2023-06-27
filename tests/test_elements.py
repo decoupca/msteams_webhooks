@@ -59,7 +59,7 @@ def test_media() -> None:
             {
                 "url": "https://adaptivecardsblob.blob.core.windows.net/assets/AdaptiveCardsOverviewVideo.mp4",
                 "mimeType": "video/mp4",
-            }
+            },
         ],
         "poster": "https://adaptivecards.io/content/poster-video.png",
         "altText": "Adaptive Cards overview video",
@@ -69,7 +69,7 @@ def test_media() -> None:
             MediaSource(
                 url="https://adaptivecardsblob.blob.core.windows.net/assets/AdaptiveCardsOverviewVideo.mp4",
                 mime_type="video/mp4",
-            )
+            ),
         ],
         poster="https://adaptivecards.io/content/poster-video.png",
         alt_text="Adaptive Cards overview video",

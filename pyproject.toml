@@ -37,3 +37,26 @@ profile = "black"
 
 [tool.black]
 line_length = 100
+
+[tool.ruff]
+line-length = 100
+select = [
+    'A',    # flake8-builtins
+    'B',    # flake8-bugbear
+    'COM',  # flake8-commas
+    'D',    # pydocstyle
+    'E',    # pycodestyle
+    'ERA',  # eradicate
+    'F',    # pyflakes
+    'FBT',  # flake8-boolean-trap
+    'I',    # isort
+    'ISC',  # flake8-implicit-str-concat
+    'N',    # pep8-naming
+    'PIE',  # flake8-pie
+    'PT',   # flake8-pytest-style
+    'RET',  # flake8-return
+    'RUF',  # ruff
+    'SIM',  # flake8-simplify
+    'T20',  # flake8-print
+    'UP',   # pyupgrade
+]

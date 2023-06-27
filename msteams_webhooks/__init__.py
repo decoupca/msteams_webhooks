@@ -25,12 +25,15 @@ class TeamsWebhook:
         """Sends a card to the channel.
 
         Args:
+        ----
             card: The card to send.
 
         Returns:
+        -------
             None.
 
         Raises:
+        ------
             TeamsWebhookError if the response was not 200/OK.
             TeamsRateLimitError if 429 was found inside the response body.
         """

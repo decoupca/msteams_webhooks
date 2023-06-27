@@ -13,15 +13,14 @@ class CardElement:
     def serialize(self) -> dict[str, Any]:
         payload = {"type": self.TYPE}
         for attr, key in self.ATTR_MAP.items():
-            if value := getattr(self, attr):
-                if value is not None:
-                    payload[key] = value
+            if (value := getattr(self, attr)) and value is not None:
+                payload[key] = value
         return payload
 
 
 class TextBlock(CardElement):
     """TextBlock element.
-    https://adaptivecards.io/explorer/TextBlock.html
+    https://adaptivecards.io/explorer/TextBlock.html.
     """
 
     TYPE = "TextBlock"
@@ -65,9 +64,8 @@ class TextBlock(CardElement):
 
 
 class Image(CardElement):
-    """
-    Image element.
-    https://adaptivecards.io/explorer/Image.html
+    """Image element.
+    https://adaptivecards.io/explorer/Image.html.
 
     """
 
