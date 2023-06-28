@@ -7,7 +7,7 @@ import httpx
 from msteams_webhooks import types
 from msteams_webhooks.actions import Action, OpenURLAction
 from msteams_webhooks.buttons import OpenURLButton
-from msteams_webhooks.cards import AdaptiveCard, Card, HeroCard
+from msteams_webhooks.cards import AdaptiveCard, Card, HeroCard, ReceiptCard
 from msteams_webhooks.containers import (
     ActionSet,
     Column,
@@ -16,6 +16,8 @@ from msteams_webhooks.containers import (
     Fact,
     FactSet,
     ImageSet,
+    ReceiptFact,
+    ReceiptItem,
     Table,
     TableCell,
     TableRow,
@@ -152,6 +154,9 @@ __all__ = (
     "MediaSource",
     "OpenURLAction",
     "OpenURLButton",
+    "ReceiptCard",
+    "ReceiptFact",
+    "ReceiptItem",
     "Table",
     "TableCell",
     "TableRow",
