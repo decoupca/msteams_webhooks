@@ -20,6 +20,8 @@ theme:
       toggle:
         icon: material/lightbulb
         name: Switch to Light Mode
+extra_css:
+  - extra.css
 plugins:
   - search:
       lang: en
