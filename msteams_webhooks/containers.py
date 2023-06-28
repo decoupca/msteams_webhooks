@@ -361,6 +361,67 @@ class ImageSet(CardContainer):
         return payload
 
 
+class ReceiptFact(CardContainer):
+    """A key/value pair for use with a Receipt Card."""
+
+    def __init__(self, key: str, value: str) -> None:
+        """Create a fact to include in a Receipt Card.
+
+        Args:
+            key: Fact key.
+            value: Fact value.
+
+        Returns:
+            None.
+
+        Raises:
+            N/A
+        """
+        self.key = key
+        self.value = value
+
+    def serialize(self) -> dict[str, Any]:
+        """Serialize object into data structure."""
+        return {"key": self.key, "value": self.value}
+
+
+class ReceiptItem(CardContainer):
+    """Item for a Receipt Card."""
+
+    def __init__(
+        self, title: str, price: str, quantity: int, *, image: Optional[str] = None,
+    ) -> None:
+        """Item for a Receipt Card.
+
+        Args:
+            title: Title of the item.
+            price: Unit price of the item.
+            quantity: Number of items sold.
+            image: Optional URL to an image of the item.
+
+        Returns:
+            None.
+
+        Raises:
+            N/A
+        """
+        self.title = title
+        self.price = price
+        self.quantity = quantity
+        self.image = image
+
+    def serialize(self) -> dict[str, Any]:
+        """Serialize object into data structure."""
+        payload: dict[str, Any] = {
+            "title": self.title,
+            "price": self.price,
+            "quantity": self.quantity,
+        }
+        if self.image:
+            payload["image"] = {"url": self.image}
+        return payload
+
+
 class TableCell(CardContainer):
     """Single cell of a ``Table`` container.
 

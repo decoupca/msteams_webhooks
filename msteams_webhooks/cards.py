@@ -8,7 +8,7 @@ from msteams_webhooks import types
 from msteams_webhooks.actions import Action
 from msteams_webhooks.base import Entity
 from msteams_webhooks.buttons import Button
-from msteams_webhooks.containers import CardContainer
+from msteams_webhooks.containers import CardContainer, ReceiptFact, ReceiptItem
 from msteams_webhooks.elements import CardElement
 
 
@@ -158,4 +158,60 @@ class HeroCard(Card):
             payload["content"]["images"] = [{"url": img} for img in self.images]
         if self.buttons:
             payload["content"]["buttons"] = [x.serialize() for x in self.buttons]
+        return payload
+
+
+class ReceiptCard(Card):
+    """Provides a summary of purchased items."""
+
+    def __init__(
+        self,
+        title: str,
+        items: list[ReceiptItem],
+        total: str,
+        *,
+        tax: Optional[str] = None,
+        facts: Optional[list[ReceiptFact]] = None,
+        buttons: Optional[list[Button]] = None,
+    ) -> None:
+        """Provides a summary of purchased items.
+
+        Args:
+            title: Title for receipt.
+            items: List of ``ReceiptItem`` elements to include.
+            total: Total cost of all items.
+            tax: Amount of tax.
+            facts: Optional list of ``ReceiptFact`` elements to include.
+            buttons: Optional list of ``Button`` elements to include.
+
+        Returns:
+            None.
+
+        Raises:
+            N/A
+        """
+        self.title = title
+        self.items = items
+        self.total = total
+        self.tax = tax
+        self.facts = facts
+        self.buttons = buttons
+
+    def serialize(self) -> dict[str, Any]:
+        """Serialize object into data structure."""
+        payload: dict[str, Any] = {
+            "contentType": "application/vnd.microsoft.card.receipt",
+        }
+        content = {
+            "title": self.title,
+            "total": self.total,
+            "items": [x.serialize() for x in self.items],
+        }
+        if self.facts:
+            content["facts"] = [x.serialize() for x in self.facts]
+        if self.tax:
+            content["tax"] = self.tax
+        if self.buttons:
+            content["buttons"] = [x.serialize() for x in self.buttons]
+        payload["content"] = content
         return payload

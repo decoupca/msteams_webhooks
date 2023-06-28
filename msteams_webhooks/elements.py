@@ -10,88 +10,6 @@ class CardElement(Entity):
     """Base element class."""
 
 
-class TextBlock(CardElement):
-    """Displays text, allowing control over font sizes, weight, and color.
-
-    Schema Explorer: https://adaptivecards.io/explorer/TextBlock.html
-    """
-
-    def __init__(
-        self,
-        text: str,
-        *,
-        color: Optional[types.Colors] = None,
-        font_type: Optional[types.FontTypes] = None,
-        horizontal_alignment: Optional[types.HorizontalAlignmentTypes] = None,
-        is_subtle: Optional[bool] = None,
-        max_lines: Optional[int] = None,
-        size: Optional[types.FontSizes] = None,
-        weight: Optional[types.FontWeights] = None,
-        wrap: Optional[bool] = None,
-        style: Optional[types.TextBlockStyles] = None,
-    ) -> None:
-        """Build a TextBlock element.
-
-        Args:
-            text: Text to display. A subset of markdown is supported (https://aka.ms/ACTextFeatures)
-            color: Controls the color of TextBlock elements.
-            font_type: Type of font to use for rendering.
-            horizontal_alignment: Controls the horizontal text alignment. When not specified,
-                the value of horizontalAlignment is inherited from the parent container. If no
-                parent container has horizontalAlignment set, it defaults to Left.
-            is_subtle: If true, displays text slightly toned down to appear less prominent.
-                Default: ``False``
-            max_lines: Specifies the maximum number of lines to display. `text` will be
-                clipped if it exceeds `max_lines`.
-            size: Controls size of text.
-            weight: Controls the weight of TextBlock elements.
-            wrap: If true, allow `text` to wrap. Otherwise, text is clipped. Default: False
-            style: The style of this TextBlock for accessibility purposes.
-
-        Returns:
-            None.
-
-        Raises:
-            N/A
-        """
-        self.text = text
-        self.color = color
-        self.font_type = font_type
-        self.horizontal_alignment = horizontal_alignment
-        self.is_subtle = is_subtle
-        self.max_lines = max_lines
-        self.size = size
-        self.weight = weight
-        self.wrap = wrap
-        self.style = style
-
-    def serialize(self) -> dict[str, Any]:
-        """Serialize object into data structure."""
-        payload: dict[str, Any] = {
-            "type": "TextBlock",
-            "text": self.text,
-        }
-        if self.color:
-            payload["color"] = self.color
-        if self.font_type:
-            payload["fontType"] = self.font_type
-        if self.horizontal_alignment:
-            payload["horizontalAlignment"] = self.horizontal_alignment
-        if self.is_subtle:
-            payload["isSubtle"] = self.is_subtle
-        if self.max_lines:
-            payload["maxLines"] = self.max_lines
-        if self.size:
-            payload["size"] = self.size
-        if self.weight:
-            payload["weight"] = self.weight
-        if self.wrap:
-            payload["wrap"] = self.wrap
-        if self.style:
-            payload["style"] = self.style
-        return payload
-
-
 class Image(CardElement):
     """Displays an image. Acceptable formats are PNG, JPEG, and GIF.
 
@@ -249,4 +167,86 @@ class Media(CardElement):
             payload["poster"] = self.poster
         if self.alt_text:
             payload["altText"] = self.alt_text
+        return payload
+
+
+class TextBlock(CardElement):
+    """Displays text, allowing control over font sizes, weight, and color.
+
+    Schema Explorer: https://adaptivecards.io/explorer/TextBlock.html
+    """
+
+    def __init__(
+        self,
+        text: str,
+        *,
+        color: Optional[types.Colors] = None,
+        font_type: Optional[types.FontTypes] = None,
+        horizontal_alignment: Optional[types.HorizontalAlignmentTypes] = None,
+        is_subtle: Optional[bool] = None,
+        max_lines: Optional[int] = None,
+        size: Optional[types.FontSizes] = None,
+        weight: Optional[types.FontWeights] = None,
+        wrap: Optional[bool] = None,
+        style: Optional[types.TextBlockStyles] = None,
+    ) -> None:
+        """Build a TextBlock element.
+
+        Args:
+            text: Text to display. A subset of markdown is supported (https://aka.ms/ACTextFeatures)
+            color: Controls the color of TextBlock elements.
+            font_type: Type of font to use for rendering.
+            horizontal_alignment: Controls the horizontal text alignment. When not specified,
+                the value of horizontalAlignment is inherited from the parent container. If no
+                parent container has horizontalAlignment set, it defaults to Left.
+            is_subtle: If true, displays text slightly toned down to appear less prominent.
+                Default: ``False``
+            max_lines: Specifies the maximum number of lines to display. `text` will be
+                clipped if it exceeds `max_lines`.
+            size: Controls size of text.
+            weight: Controls the weight of TextBlock elements.
+            wrap: If true, allow `text` to wrap. Otherwise, text is clipped. Default: False
+            style: The style of this TextBlock for accessibility purposes.
+
+        Returns:
+            None.
+
+        Raises:
+            N/A
+        """
+        self.text = text
+        self.color = color
+        self.font_type = font_type
+        self.horizontal_alignment = horizontal_alignment
+        self.is_subtle = is_subtle
+        self.max_lines = max_lines
+        self.size = size
+        self.weight = weight
+        self.wrap = wrap
+        self.style = style
+
+    def serialize(self) -> dict[str, Any]:
+        """Serialize object into data structure."""
+        payload: dict[str, Any] = {
+            "type": "TextBlock",
+            "text": self.text,
+        }
+        if self.color:
+            payload["color"] = self.color
+        if self.font_type:
+            payload["fontType"] = self.font_type
+        if self.horizontal_alignment:
+            payload["horizontalAlignment"] = self.horizontal_alignment
+        if self.is_subtle:
+            payload["isSubtle"] = self.is_subtle
+        if self.max_lines:
+            payload["maxLines"] = self.max_lines
+        if self.size:
+            payload["size"] = self.size
+        if self.weight:
+            payload["weight"] = self.weight
+        if self.wrap:
+            payload["wrap"] = self.wrap
+        if self.style:
+            payload["style"] = self.style
         return payload
