@@ -31,7 +31,7 @@ class AdaptiveCard(Card):
         body: Optional[list[Union[CardElement, CardContainer]]] = None,
         actions: Optional[list[Action]] = None,
         version: Optional[str] = None,
-        background_image: Optional[types.URL] = None,
+        background_image: Optional[str] = None,
         min_height: Optional[str] = None,
         rtl: Optional[bool] = None,
         speak: Optional[str] = None,
@@ -120,7 +120,7 @@ class HeroCard(Card):
         text: str,
         *,
         subtitle: Optional[str] = None,
-        images: Optional[list[types.URL]] = None,
+        images: Optional[list[str]] = None,
         buttons: Optional[list[Button]] = None,
     ) -> None:
         """Display a single large image, one or more buttons, and text.

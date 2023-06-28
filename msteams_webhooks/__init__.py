@@ -32,7 +32,7 @@ class TeamsWebhook:
 
     def __init__(
         self,
-        url: types.URL,
+        url: str,
         *,
         verify: Union[str, bool, ssl.SSLContext] = True,
         timeout: float = 15.0,

@@ -1,7 +1,6 @@
 """msteams_webhooks.types."""
-from typing import Literal, NewType, Union
+from typing import Literal, Union
 
-URL = NewType("URL", str)
 Colors = Literal["default", "accent", "good", "warning", "attention", "light", "dark"]
 ColumnWidthTypes = Union[Literal["auto", "stretch"], str]
 ContainerStyleTypes = Literal["default", "emphasis", "good", "attention", "warning", "accent"]

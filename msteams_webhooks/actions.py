@@ -5,7 +5,6 @@ actions which work with webhooks are implemented.
 """
 from typing import Any, Optional
 
-from msteams_webhooks import types
 from msteams_webhooks.base import Entity
 
 
@@ -21,7 +20,7 @@ class OpenURLAction(Action):
 
     def __init__(
         self,
-        url: types.URL,
+        url: str,
         *,
         title: Optional[str] = None,
     ) -> None:

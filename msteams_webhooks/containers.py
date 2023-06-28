@@ -50,7 +50,7 @@ class Container(CardContainer):
         style: Optional[types.ContainerStyleTypes] = None,
         vertical_content_alignment: Optional[types.VerticalAlignmentTypes] = None,
         bleed: Optional[bool] = None,
-        background_image: Optional[types.URL] = None,
+        background_image: Optional[str] = None,
         min_height: Optional[str] = None,
         rtl: Optional[bool] = None,
     ) -> None:
@@ -123,7 +123,7 @@ class Column(CardContainer):
     def __init__(
         self,
         items: Optional[list[CardElement]] = None,
-        background_image: Optional[types.URL] = None,
+        background_image: Optional[str] = None,
         bleed: Optional[bool] = None,
         min_height: Optional[str] = None,
         rtl: Optional[bool] = None,
@@ -389,7 +389,12 @@ class ReceiptItem(CardContainer):
     """Item for a Receipt Card."""
 
     def __init__(
-        self, title: str, price: str, quantity: int, *, image: Optional[str] = None,
+        self,
+        title: str,
+        price: str,
+        quantity: int,
+        *,
+        image: Optional[str] = None,
     ) -> None:
         """Item for a Receipt Card.
 
@@ -436,7 +441,7 @@ class TableCell(CardContainer):
         style: Optional[types.ContainerStyleTypes] = None,
         vertical_content_alignment: Optional[types.VerticalAlignmentTypes] = None,
         bleed: Optional[bool] = None,
-        background_image: Optional[types.URL] = None,
+        background_image: Optional[str] = None,
         min_height: Optional[str] = None,
         rtl: Optional[bool] = None,
     ) -> None:

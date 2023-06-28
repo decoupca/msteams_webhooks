@@ -35,6 +35,9 @@ path = "msteams_webhooks/__version__.py"
 [tool.black]
 line_length = 100
 
+[tool.isort]
+profile = "black"
+
 [tool.ruff]
 line-length = 100
 select = [

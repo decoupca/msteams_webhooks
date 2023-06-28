@@ -18,7 +18,7 @@ class Image(CardElement):
 
     def __init__(
         self,
-        url: types.URL,
+        url: str,
         *,
         alt_text: Optional[str] = None,
         background_color: Optional[str] = None,
@@ -98,7 +98,7 @@ class MediaSource(CardElement):
     Schema Explorer: https://adaptivecards.io/explorer/MediaSource.html
     """
 
-    def __init__(self, url: types.URL, *, mime_type: Optional[str] = None) -> None:
+    def __init__(self, url: str, *, mime_type: Optional[str] = None) -> None:
         """Defines a source for a Media element.
 
         Args:
@@ -133,7 +133,7 @@ class Media(CardElement):
         self,
         sources: list[MediaSource],
         *,
-        poster: Optional[types.URL] = None,
+        poster: Optional[str] = None,
         alt_text: Optional[str] = None,
     ) -> None:
         """Displays a media player for audio or video content.
