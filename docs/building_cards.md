@@ -21,7 +21,7 @@ from msteams_webhooks import AdaptiveCard, Image, TextBlock
 card = AdaptiveCard()
 image = Image(url="https://adaptivecards.io/content/cats/1.png", alt_text="Cat")
 text_block = TextBlock(text="This is a picture of a cat.")
-card.body.extend(image, text_block)
+card.body.extend([image, text_block])
 ```
 
 You can also change properties of any object after building it:
