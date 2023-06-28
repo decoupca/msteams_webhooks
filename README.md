@@ -150,11 +150,4 @@ The Teams webhooks API does support [mentioning individuals](https://learn.micro
 
 ## Roadmap
 
-### Near-term
-
-Features for 1.0.0:
-* Implement all elements, actions, and container objects relevant to webhooks.
-
-### Mid-term
-
 * Add support for mentioning individuals in Adaptive Cards.
