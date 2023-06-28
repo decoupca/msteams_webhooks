@@ -29,7 +29,7 @@ from msteams_webhooks import AsyncTeamsWebhook
 import asyncio
 channel1 = AsyncTeamsWebhook('https://webhook.office.com/webhookb2/your/channel/url1')
 channel2 = AsyncTeamsWebhook('https://webhook.office.com/webhookb2/your/channel/url2')
-channel3 = AsyncTeamsWebhook('https://webhook.office.com/webhookb2/your/channel/url2')
+channel3 = AsyncTeamsWebhook('https://webhook.office.com/webhookb2/your/channel/url3')
 async def send_messages() -> None:
     await asyncio.gather(
         channel1.send_message('Channel 1 message'),
