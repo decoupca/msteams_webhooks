@@ -27,7 +27,7 @@ class ActionSet(CardContainer):
             None.
 
         Raises:
-            N/A
+            None.
         """
         self.actions = actions
 
@@ -80,7 +80,7 @@ class Container(CardContainer):
             None.
 
         Raises:
-            N/A
+            None.
         """
         self.items = items
         self.select_action = select_action
@@ -163,7 +163,7 @@ class Column(CardContainer):
             None.
 
         Raises:
-            N/A
+            None.
         """
         self.items = items
         self.background_image = background_image
@@ -237,7 +237,7 @@ class ColumnSet(CardContainer):
             None.
 
         Raises:
-            N/A
+            None.
         """
         self.columns = columns
         self.select_action = select_action
@@ -281,7 +281,7 @@ class Fact(CardContainer):
             None.
 
         Raises:
-            N/A
+            None.
         """
         self.title = title
         self.value = value
@@ -307,7 +307,7 @@ class FactSet(CardContainer):
             None.
 
         Raises:
-            N/A
+            None.
         """
         self.facts = facts
 
@@ -345,7 +345,7 @@ class ImageSet(CardContainer):
             None.
 
         Raises:
-            N/A
+            None.
         """
         self.images = images
         self.image_size = image_size
@@ -375,7 +375,7 @@ class ReceiptFact(CardContainer):
             None.
 
         Raises:
-            N/A
+            None.
         """
         self.key = key
         self.value = value
@@ -408,7 +408,7 @@ class ReceiptItem(CardContainer):
             None.
 
         Raises:
-            N/A
+            None.
         """
         self.title = title
         self.price = price
@@ -469,7 +469,7 @@ class TableCell(CardContainer):
             None.
 
         Raises:
-            N/A
+            None.
         """
         self.items = items
         self.select_action = select_action
@@ -521,7 +521,7 @@ class TableRow(CardContainer):
             None.
 
         Raises:
-            N/A
+            None.
         """
         self.cells = cells
         self.style = style

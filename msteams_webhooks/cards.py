@@ -66,7 +66,7 @@ class AdaptiveCard(Card):
             None.
 
         Raises:
-            N/A
+            None.
         """
         self.version = version or "1.6"
         self.body = body or []
@@ -136,7 +136,7 @@ class HeroCard(Card):
             None.
 
         Raises:
-            N/A
+            None.
         """
         self.title = title
         self.text = text
@@ -188,7 +188,7 @@ class ReceiptCard(Card):
             None.
 
         Raises:
-            N/A
+            None.
         """
         self.title = title
         self.items = items

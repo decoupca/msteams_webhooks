@@ -37,7 +37,7 @@ class OpenURLAction(Action):
             None.
 
         Raises:
-            N/A
+            None.
         """
         self.url = url
         self.title = title

@@ -55,7 +55,7 @@ class Image(CardElement):
             None.
 
         Raises:
-            N/A
+            None.
         """
         self.url = url
         self.alt_text = alt_text
@@ -110,7 +110,7 @@ class MediaSource(CardElement):
             None.
 
         Raises:
-            N/A
+            None.
         """
         self.url = url
         self.mime_type = mime_type
@@ -151,7 +151,7 @@ class Media(CardElement):
             None.
 
         Raises:
-            N/A
+            None.
         """
         self.sources = sources
         self.poster = poster
@@ -212,7 +212,7 @@ class TextBlock(CardElement):
             None.
 
         Raises:
-            N/A
+            None.
         """
         self.text = text
         self.color = color

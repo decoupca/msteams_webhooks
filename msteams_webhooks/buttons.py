@@ -23,7 +23,7 @@ class OpenURLButton(Button):
             None.
 
         Raises:
-            N/A
+            None.
         """
         self.title = title
         self.url = url

@@ -51,7 +51,7 @@ class TeamsWebhook:
             None.
 
         Raises:
-            N/A
+            None.
         """
         self.url = url
         self.client = httpx.Client(verify=verify, timeout=timeout)
@@ -121,7 +121,7 @@ class TeamsWebhook:
             None.
 
         Raises:
-            N/A
+            None.
         """
         text_block = TextBlock(
             text=text,
@@ -163,7 +163,7 @@ class AsyncTeamsWebhook:
             None.
 
         Raises:
-            N/A
+            None.
         """
         self.url = url
         self.client = httpx.AsyncClient(verify=verify, timeout=timeout)
@@ -233,7 +233,7 @@ class AsyncTeamsWebhook:
             None.
 
         Raises:
-            N/A
+            None.
         """
         text_block = TextBlock(
             text=text,
