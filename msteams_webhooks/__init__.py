@@ -252,6 +252,7 @@ __all__ = (
     "Action",
     "ActionSet",
     "AdaptiveCard",
+    "AsyncTeamsWebhook",
     "Column",
     "ColumnSet",
     "Container",
