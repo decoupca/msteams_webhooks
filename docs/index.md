@@ -49,3 +49,34 @@ channel.send_message(
 ```
 
 The `text` property also supports [a subset of Markdown](https://support.microsoft.com/en-us/office/use-markdown-formatting-in-teams-4d10bd65-55e2-4b2d-a1f3-2bebdcd2c772) formatting syntax.
+
+## Manually Build a Card
+
+[Hero Cards](https://learn.microsoft.com/en-us/microsoftteams/platform/task-modules-and-cards/cards/cards-reference#hero-card) provide a simple example of building a card from scratch.
+
+Here's how to build the example Hero Card from the [documentation](https://learn.microsoft.com/en-us/microsoftteams/platform/task-modules-and-cards/cards/cards-reference#hero-card):
+
+```python
+from msteams_webhooks import TeamsWebhook
+from msteams_webhooks.buttons import OpenURLButton
+from msteams_webhooks.cards import AdaptiveCard, HeroCard
+channel = TeamsWebhook('<your-webhook-url>')
+official_website = OpenURLButton(
+    title="Official website",
+    url="https://www.seattlemonorail.com"
+)
+wikipedia_page = OpenURLButton(
+    title="Wikipedia page",
+    url="https://en.wikipedia.org/wiki/Seattle_Center_Monorail"
+)
+card = HeroCard(
+    title='Seattle Center Monorail',
+    subtitle='Seattle Center Monorail',
+    text=("The Seattle Center Monorail is an elevated train line between Seattle Center "
+            "(near the Space Needle) and downtown Seattle. It was built for the 1962 World's Fair. "
+            "Its original two trains, completed in 1961, are still in service."),
+    images=["https://upload.wikimedia.org/wikipedia/commons/thumb/4/49/Seattle_monorail01_2008-02-25.jpg/1024px-Seattle_monorail01_2008-02-25.jpg"],
+    buttons=[official_website, wikipedia_page]
+)
+channel.send_card(card)
+```

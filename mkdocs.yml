@@ -37,8 +37,11 @@ plugins:
 markdown_extensions:
     - admonition
     - attr_list
+    - pymdownx.superfences
 nav:
   - Overview: index.md
+  - Building & Sending Cards: building_cards.md
+  - Advanced: advanced.md
   - API Reference:
     - TeamsWebhook: reference/teams_webhook.md
     - Actions: reference/actions.md
