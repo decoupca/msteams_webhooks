@@ -1,4 +1,4 @@
-"""msteams_webhooks.buttons."""
+"""Buttons are interactive elements available to use in Hero Cards."""
 from typing import Any
 
 from msteams_webhooks import types
@@ -10,7 +10,7 @@ class Button(Entity):
 
 
 class OpenURLButton(Button):
-    """Open a URL."""
+    """Button that opens a URL when clicked or tapped."""
 
     def __init__(self, url: types.URL, title: str) -> None:
         """Open a URL.

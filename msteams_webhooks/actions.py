@@ -10,9 +10,9 @@ class Action(Entity):
 
 
 class OpenURLAction(Action):
-    """Open URL action.
+    """Action that opens a URL when clicked or tapped.
 
-    https://adaptivecards.io/explorer/Action.OpenUrl.html
+    Schema Explorer: https://adaptivecards.io/explorer/Action.OpenUrl.html
     """
 
     def __init__(
@@ -25,7 +25,6 @@ class OpenURLAction(Action):
 
         When invoked, show the given url either by launching it in an external web browser
         or showing within an embedded web browser.
-
 
         Args:
             url: The URL to open.

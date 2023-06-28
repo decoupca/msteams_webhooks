@@ -1,0 +1,46 @@
+site_name: msteams_webhooks Docs
+site_url: https://example.com/
+repo_name: decoupca/msteams_webhooks
+repo_url: https://github.com/decoupca/msteams_webhooks
+theme:
+  name: material
+  icon:
+    repo: fontawesome/brands/github
+  features:
+    - content.code.copy
+    - navigation.footer
+  palette:
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      toggle:
+        icon: material/lightbulb-outline
+        name: Switch to Dark Mode
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      toggle:
+        icon: material/lightbulb
+        name: Switch to Light Mode
+plugins:
+  - search:
+      lang: en
+  - mkdocstrings:
+      enabled: true
+      default_handler: python
+      handlers:
+        python:
+          paths: msteams_webhooks
+          options:
+            docstring_style: google
+            members_order: source
+markdown_extensions:
+    - admonition
+    - attr_list
+nav:
+  - Overview: index.md
+  - API Reference:
+    - TeamsWebhook: reference/teams_webhook.md
+    - Actions: reference/actions.md
+    - Buttons: reference/buttons.md
+    - Cards: reference/cards.md
+    - Containers: reference/containers.md
+    - Elements: reference/elements.md

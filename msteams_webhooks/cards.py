@@ -1,4 +1,7 @@
-"""msteams_webhooks.cards."""
+"""Cards form the basis of all Teams messages.
+
+The type of card determines their format, and what elements may be included in them.
+"""
 from typing import Any, Optional, Union
 
 from msteams_webhooks import types
@@ -14,9 +17,12 @@ class Card(Entity):
 
 
 class AdaptiveCard(Card):
-    """Adaptive Card.
+    """Adaptive Cards are the most flexible type of card.
 
-    https://adaptivecards.io/explorer/AdaptiveCard.html
+    They may contain any combination of text, images, and media, with optional formatting.
+
+    Details: https://adaptivecards.io/
+    Schema Explorer: https://adaptivecards.io/explorer/AdaptiveCard.html
     """
 
     def __init__(

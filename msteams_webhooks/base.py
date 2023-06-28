@@ -1,4 +1,4 @@
-"""msteams_webhooks.base."""
+"""Base classes from which other classes inherit."""
 from typing import Any
 
 

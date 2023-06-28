@@ -1,4 +1,4 @@
-"""msteams_webhooks.containers."""
+"""Containers provide ways to organize and format elements within cards."""
 from typing import Any, Optional, Union
 
 from msteams_webhooks import types
@@ -14,7 +14,7 @@ class CardContainer(Entity):
 class ActionSet(CardContainer):
     """Action sets.
 
-    https://adaptivecards.io/explorer/ActionSet.html
+    Schema Explorer: https://adaptivecards.io/explorer/ActionSet.html
     """
 
     def __init__(self, actions: list[Action]) -> None:
@@ -37,9 +37,9 @@ class ActionSet(CardContainer):
 
 
 class Container(CardContainer):
-    """Generic container.
+    """Generic container, which may contain any other container or element.
 
-    https://adaptivecards.io/explorer/Container.html
+    Schema Explorer: https://adaptivecards.io/explorer/Container.html
     """
 
     def __init__(
@@ -54,7 +54,9 @@ class Container(CardContainer):
         min_height: Optional[str] = None,
         rtl: Optional[bool] = None,
     ) -> None:
-        """Containers group items together.
+        """Containers group items together in arbitrary ways.
+
+        May be combined with other containers or elements in flexible ways.
 
         Args:
             items: The card elements to render inside the ``Container``.
@@ -113,9 +115,9 @@ class Container(CardContainer):
 
 
 class Column(CardContainer):
-    """Column, element of a ColumnSet or column in a table.
+    """A single column, as an lement of a ``ColumnSet``, or a column in a ``Table``.
 
-    https://adaptivecards.io/explorer/Column.html
+    Schema explorer: https://adaptivecards.io/explorer/Column.html
     """
 
     def __init__(
@@ -132,7 +134,7 @@ class Column(CardContainer):
         vertical_content_alignment: Optional[types.VerticalAlignmentTypes] = None,
         width: Optional[types.ColumnWidthTypes] = None,
     ) -> None:
-        """Defines a container that is part of a ``ColumnSet``.
+        """Defines a container that is part of a ``ColumnSet`` or a column in a ``Table``.
 
         Args:
             items: The card elements to render inside the ``Column``.
@@ -204,9 +206,9 @@ class Column(CardContainer):
 
 
 class ColumnSet(CardContainer):
-    """ColumnSet.
+    """Grouping of columns.
 
-    https://adaptivecards.io/explorer/ColumnSet.html
+    Schema Explorer: https://adaptivecards.io/explorer/ColumnSet.html
     """
 
     def __init__(
@@ -263,9 +265,9 @@ class ColumnSet(CardContainer):
 
 
 class Fact(CardContainer):
-    """Fact.
+    """Facts organize key/value pairs into an organized list.
 
-    https://adaptivecards.io/explorer/Fact.html
+    Schema Explorer: https://adaptivecards.io/explorer/Fact.html
     """
 
     def __init__(self, title: str, value: str) -> None:
@@ -290,9 +292,9 @@ class Fact(CardContainer):
 
 
 class FactSet(CardContainer):
-    """FactSet.
+    """A group of ``Fact`` containers.
 
-    https://adaptivecards.io/explorer/FactSet.html
+    Schema Explorer: https://adaptivecards.io/explorer/FactSet.html
     """
 
     def __init__(self, facts: list[Fact]) -> None:
@@ -318,9 +320,9 @@ class FactSet(CardContainer):
 
 
 class ImageSet(CardContainer):
-    """ImageSet.
+    """A collection of images.
 
-    https://adaptivecards.io/explorer/ImageSet.html
+    Schema Explorer: https://adaptivecards.io/explorer/ImageSet.html
     """
 
     def __init__(
@@ -360,9 +362,9 @@ class ImageSet(CardContainer):
 
 
 class TableCell(CardContainer):
-    """Table cell.
+    """Single cell of a ``Table`` container.
 
-    https://adaptivecards.io/explorer/TableCell.html
+    Schema Explorer: https://adaptivecards.io/explorer/TableCell.html
     """
 
     def __init__(
@@ -436,7 +438,7 @@ class TableCell(CardContainer):
 
 
 class TableRow(CardContainer):
-    """TableRow."""
+    """Single row of a ``Table`` container."""
 
     def __init__(
         self,
@@ -467,9 +469,9 @@ class TableRow(CardContainer):
 
 
 class Table(CardContainer):
-    """Table.
+    """Container for displaying tabular data.
 
-    https://adaptivecards.io/explorer/Table.html
+    Schema Explorer: https://adaptivecards.io/explorer/Table.html
     """
 
     def __init__(

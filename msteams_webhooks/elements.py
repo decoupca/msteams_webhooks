@@ -1,4 +1,4 @@
-"""msteams_webhooks.elements."""
+"""Cards are built using various elements."""
 from typing import Any, Literal, Optional, Union
 
 from msteams_webhooks import types
@@ -11,9 +11,9 @@ class CardElement(Entity):
 
 
 class TextBlock(CardElement):
-    """TextBlock element.
+    """Displays text, allowing control over font sizes, weight, and color.
 
-    https://adaptivecards.io/explorer/TextBlock.html
+    Schema Explorer: https://adaptivecards.io/explorer/TextBlock.html
     """
 
     def __init__(
@@ -30,7 +30,7 @@ class TextBlock(CardElement):
         wrap: Optional[bool] = None,
         style: Optional[types.TextBlockStyles] = None,
     ) -> None:
-        """Displays text, allowing control over font sizes, weight, and color.
+        """Build a TextBlock element.
 
         Args:
             text: Text to display. A subset of markdown is supported (https://aka.ms/ACTextFeatures)
@@ -93,9 +93,9 @@ class TextBlock(CardElement):
 
 
 class Image(CardElement):
-    """Image element.
+    """Displays an image. Acceptable formats are PNG, JPEG, and GIF.
 
-    https://adaptivecards.io/explorer/Image.html.
+    Schema Explorer: https://adaptivecards.io/explorer/Image.html.
     """
 
     def __init__(
@@ -175,9 +175,9 @@ class Image(CardElement):
 
 
 class MediaSource(CardElement):
-    """Media source element.
+    """Defines a source for a Media element.
 
-    https://adaptivecards.io/explorer/MediaSource.html
+    Schema Explorer: https://adaptivecards.io/explorer/MediaSource.html
     """
 
     def __init__(self, url: types.URL, *, mime_type: Optional[str] = None) -> None:
@@ -206,9 +206,9 @@ class MediaSource(CardElement):
 
 
 class Media(CardElement):
-    """Media element.
+    """Displays a media player for audio or video content.
 
-    https://adaptivecards.io/explorer/Media.html
+    Schema Explorer: https://adaptivecards.io/explorer/Media.html
     """
 
     def __init__(

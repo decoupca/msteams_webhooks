@@ -2,15 +2,11 @@
 
 A modern Python API for sending messages to Microsoft Teams using webhooks. Requires Python 3.9+
 
-**Warning**: This package is in early development and may introduce breaking changes. You may expect a stable API in the 1.0.0 release. 
+**Warning**: This package is in early development and may introduce breaking changes. You can expect a stable API in the 1.0.0 release. 
 
 ## Intro
 
-Teams webhooks do not use plaintext messages, but rather "[cards](https://learn.microsoft.com/en-us/microsoftteams/platform/task-modules-and-cards/what-are-cards)" sent as JSON data structures. The format of each structure depends on the [type of card](https://learn.microsoft.com/en-us/microsoftteams/platform/task-modules-and-cards/cards/cards-reference#card-types). This package greatly simplifies creating and sending these cards by generating the required data structure for you, based on simple and famililar Python objects.
-
-Teams webhooks [support most card types](https://learn.microsoft.com/en-us/microsoftteams/platform/task-modules-and-cards/cards/cards-reference#features-that-support-different-card-types), but the most common and flexible type is the [Adaptive Card](https://learn.microsoft.com/en-us/microsoftteams/platform/task-modules-and-cards/cards/cards-reference#adaptive-card). Adaptive cards can contain many types of data including text, images, inputs, and buttons.
-
-This package aims to provide a consistent, stable Python API for all cards and elements supported by the Teams webhook API. 
+Instead of plaintext messages, Microsoft Teams uses JSON data structures called [cards](https://learn.microsoft.com/en-us/microsoftteams/platform/task-modules-and-cards/what-are-cards). This package aims to simplify creating and sending these cards by building these data structures for you, using simple and well-documented Python objects.
 
 ## Quick Start
 

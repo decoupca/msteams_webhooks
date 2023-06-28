@@ -65,8 +65,8 @@ class TeamsWebhook:
             None.
 
         Raises:
-            TeamsWebhookError if the response was anything other than 200/OK.
-            TeamsRateLimitError if "429" was found inside the response body.
+            TeamsWebhookError: if the response was anything other than 200/OK.
+            TeamsRateLimitError: if "429" was found inside the response body.
         """
         headers = {"Content-Type": "application/json"}
         # Even though the attachments key as a list implies that more than one card
@@ -84,6 +84,7 @@ class TeamsWebhook:
         self,
         text: str,
         *,
+        color: Optional[types.Colors] = None,
         font_type: Optional[types.FontTypes] = None,
         horizontal_alignment: Optional[types.HorizontalAlignmentTypes] = None,
         is_subtle: Optional[bool] = None,
@@ -122,6 +123,7 @@ class TeamsWebhook:
         """
         text_block = TextBlock(
             text=text,
+            color=color,
             font_type=font_type,
             horizontal_alignment=horizontal_alignment,
             is_subtle=is_subtle,
