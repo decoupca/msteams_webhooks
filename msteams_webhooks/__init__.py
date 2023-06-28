@@ -8,18 +8,9 @@ from msteams_webhooks import types
 from msteams_webhooks.actions import Action, OpenURLAction
 from msteams_webhooks.buttons import OpenURLButton
 from msteams_webhooks.cards import AdaptiveCard, Card, HeroCard
-from msteams_webhooks.containers import (
-    ActionSet,
-    Column,
-    ColumnSet,
-    Container,
-    Fact,
-    FactSet,
-    ImageSet,
-    Table,
-    TableCell,
-    TableRow,
-)
+from msteams_webhooks.containers import (ActionSet, Column, ColumnSet,
+                                         Container, Fact, FactSet, ImageSet,
+                                         Table, TableCell, TableRow)
 from msteams_webhooks.elements import Image, Media, MediaSource, TextBlock
 from msteams_webhooks.exceptions import TeamsRateLimitError, TeamsWebhookError
 

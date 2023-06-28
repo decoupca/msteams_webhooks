@@ -1,4 +1,7 @@
-"""msteams_webhooks.actions."""
+"""Actions provide ways to interact with cards.
+
+Not all actions work with webhooks.
+"""
 from typing import Any, Optional
 
 from msteams_webhooks import types
@@ -10,7 +13,7 @@ class Action(Entity):
 
 
 class OpenURLAction(Action):
-    """Action that opens a URL when clicked or tapped.
+    """Opens a URL when clicked or tapped.
 
     Schema Explorer: https://adaptivecards.io/explorer/Action.OpenUrl.html
     """
