@@ -20,6 +20,26 @@ You can inspect any object's JSON payload by calling its `serialize()` method. T
  'contentType': 'application/vnd.microsoft.card.adaptive'}
 ```
 
+### Asynchronous API
+
+If you need to send many messages at once and performance is a factor, asynchronous code may help. Async code typically outperforms multithreaded code for I/O bound tasks like posting HTTP payloads to remote servers. Here's a basic async example that sends different messages to three channels at the same time:
+
+```python
+from msteams_webhooks import AsyncTeamsWebhook
+import asyncio
+channel1 = AsyncTeamsWebhook('https://webhook.office.com/webhookb2/your/channel/url1')
+channel2 = AsyncTeamsWebhook('https://webhook.office.com/webhookb2/your/channel/url2')
+channel3 = AsyncTeamsWebhook('https://webhook.office.com/webhookb2/your/channel/url2')
+async def send_messages() -> None:
+    await asyncio.gather(
+        channel1.send_message('Channel 1 message'),
+        channel2.send_message('Channel 2 message'),
+        channel3.send_message('Channel 3 message'),
+    )
+asyncio.run(send_messages())
+```
+
+
 ### HTTP Tuning
 
 #### HTTPS Certificate Verification

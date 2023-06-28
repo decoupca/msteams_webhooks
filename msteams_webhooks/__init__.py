@@ -137,6 +137,7 @@ class TeamsWebhook:
         )
         self.send_card(card=AdaptiveCard(body=[text_block]))
 
+
 class AsyncTeamsWebhook:
     """Asynchronous core webhook class.
 
@@ -247,6 +248,7 @@ class AsyncTeamsWebhook:
             style=style,
         )
         await self.send_card(card=AdaptiveCard(body=[text_block]))
+
 
 __all__ = (
     "Action",
