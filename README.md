@@ -158,4 +158,3 @@ Features for 1.0.0:
 ### Mid-term
 
 * Add support for mentioning individuals in Adaptive Cards.
-* Implement an `AsyncTeamsWebhook` class.
