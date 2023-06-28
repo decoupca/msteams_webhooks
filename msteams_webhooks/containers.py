@@ -420,7 +420,7 @@ class ReceiptItem(CardContainer):
         payload: dict[str, Any] = {
             "title": self.title,
             "price": self.price,
-            "quantity": self.quantity,
+            "quantity": str(self.quantity),
         }
         if self.image:
             payload["image"] = {"url": self.image}
