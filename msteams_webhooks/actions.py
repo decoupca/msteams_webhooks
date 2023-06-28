@@ -1,6 +1,7 @@
 """Actions provide ways to interact with cards.
 
-Not all actions work with webhooks.
+Not all actions defined in the Adaptive Card standard work with webhooks. Only those
+actions which work with webhooks are implemented.
 """
 from typing import Any, Optional
 
