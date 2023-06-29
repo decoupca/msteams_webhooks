@@ -54,6 +54,7 @@ select = [
     'ISC',  # flake8-implicit-str-concat
     'N',    # pep8-naming
     'PIE',  # flake8-pie
+    'PL',   # pylint
     'PT',   # flake8-pytest-style
     'S',    # flake8-bandit
     'Q',    # flake8-quotes
@@ -61,10 +62,12 @@ select = [
     'RUF',  # ruff
     'SIM',  # flake8-simplify
     'T20',  # flake8-print
+    'TRY',  # tryceratops
     'UP',   # pyupgrade
 ]
 ignore = [
-    'ANN101',    # Missing type annotation for self
+    'ANN101',   # Missing type annotation for self
+    'PLR0913',  # Too many arguments to function call
 ]
 
 [tool.ruff.pydocstyle]

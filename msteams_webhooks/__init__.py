@@ -80,7 +80,7 @@ class TeamsWebhook:
             raise TeamsWebhookError(self.response.text)
         if "429" in self.response.text:
             # Rate limit errors receive HTTP code 200 with 429 in response body.
-            raise TeamsRateLimitError("Rate limit exceeded. Slow messaging rate and try again.")
+            raise TeamsRateLimitError()
 
     def send_message(
         self,
@@ -192,7 +192,7 @@ class AsyncTeamsWebhook:
             raise TeamsWebhookError(self.response.text)
         if "429" in self.response.text:
             # Rate limit errors receive HTTP code 200 with 429 in response body.
-            raise TeamsRateLimitError("Rate limit exceeded. Slow messaging rate and try again.")
+            raise TeamsRateLimitError()
 
     async def send_message(
         self,
