@@ -42,6 +42,7 @@ nav:
   - Overview: index.md
   - Building & Sending Cards: building_cards.md
   - Advanced: advanced.md
+  - Contributing: contributing.md
   - API Reference:
     - TeamsWebhook: reference/teams_webhook.md
     - Actions: reference/actions.md
