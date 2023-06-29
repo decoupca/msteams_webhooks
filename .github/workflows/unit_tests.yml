@@ -1,4 +1,4 @@
-name: Unit Tests
+name: Test Suite
 
 on: [push, pull_request, workflow_dispatch]
 
@@ -22,4 +22,4 @@ jobs:
           pip install --upgrade pip
           pip install nox
       - name: Run nox
-        run: nox
+        run: nox --session unit_tests-${{ matrix.python-version }} linting
