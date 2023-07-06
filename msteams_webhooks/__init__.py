@@ -1,6 +1,6 @@
 """msteams_webhooks."""
 import ssl
-from typing import Optional, Union
+from typing import Any, Optional, Union
 
 import httpx
 
@@ -57,11 +57,36 @@ class TeamsWebhook:
         self.client = httpx.Client(verify=verify, timeout=timeout)
         self.response = None
 
-    def send_card(self, card: Card) -> None:
+    def send_card(self, card: Optional[Card] = None, json: Optional[dict[Any, Any]] = None) -> None:
         """Sends a card to the channel.
 
         Args:
             card: The ``Card`` to send. Only one card may be sent at a time.
+            json: Raw JSON card data to send. Useful for debugging or testing.
+
+        Returns:
+            None.
+
+        Raises:
+            None.
+        """
+        # Since the attachments value is a list, you might think you can send more
+        # than one card to the channel at once, but this isn't true. If you send
+        # more than one, only the first will be posted to the channel.
+        json = json or {}
+        if not card and not json:
+            raise ValueError("Must provide either `card` or `json` values.")  # noqa TRY003
+        if card:
+            json = {"type": "message", "attachments": [card.serialize()]}
+        if json:
+            json = {"type": "message", "attachments": [json]}
+        self.send_json(json=json)
+
+    def send_json(self, json: dict[Any, Any]) -> None:
+        """Posts a raw JSON payload to the webhook URL.
+
+        Args:
+            json: Data dict that will be converted to JSON before posting to webhook.
 
         Returns:
             None.
@@ -71,11 +96,7 @@ class TeamsWebhook:
             TeamsRateLimitError: if "429" was found inside the response body.
         """
         headers = {"Content-Type": "application/json"}
-        # Even though the attachments key as a list implies that more than one card
-        # may be sent in a single webhook call, this is not the case. If you send more
-        # than one card, only the first will be posted to the channel.
-        data = {"type": "message", "attachments": [card.serialize()]}
-        self.response = self.client.post(self.url, json=data, headers=headers)
+        self.response = self.client.post(self.url, json=json, headers=headers)
         if self.response.status_code != httpx.codes.OK:
             raise TeamsWebhookError(self.response.text)
         if "429" in self.response.text:
@@ -139,7 +160,7 @@ class TeamsWebhook:
 
 
 class AsyncTeamsWebhook:
-    """Asynchronous core webhook class.
+    """Core async webhook class.
 
     Dispatches messages to webhook URL.
     """
@@ -169,11 +190,38 @@ class AsyncTeamsWebhook:
         self.client = httpx.AsyncClient(verify=verify, timeout=timeout)
         self.response = None
 
-    async def send_card(self, card: Card) -> None:
+    async def send_card(
+        self, card: Optional[Card] = None, json: Optional[dict[Any, Any]] = None,
+    ) -> None:
         """Sends a card to the channel.
 
         Args:
             card: The ``Card`` to send. Only one card may be sent at a time.
+            json: Raw JSON card data to send. Useful for debugging or testing.
+
+        Returns:
+            None.
+
+        Raises:
+            None.
+        """
+        # Since the attachments value is a list, you might think you can send more
+        # than one card to the channel at once, but this isn't true. If you send
+        # more than one, only the first will be posted to the channel.
+        json = json or {}
+        if not card and not json:
+            raise ValueError("Must provide either `card` or `json` values.") # noqa: TRY003
+        if card:
+            json = {"type": "message", "attachments": [card.serialize()]}
+        if json:
+            json = {"type": "message", "attachments": [json]}
+        await self.send_json(json=json)
+
+    async def send_json(self, json: dict[Any, Any]) -> None:
+        """Posts a raw JSON payload to the webhook URL.
+
+        Args:
+            json: Data dict that will be converted to JSON before posting to webhook.
 
         Returns:
             None.
@@ -183,11 +231,7 @@ class AsyncTeamsWebhook:
             TeamsRateLimitError: if "429" was found inside the response body.
         """
         headers = {"Content-Type": "application/json"}
-        # Even though the attachments key as a list implies that more than one card
-        # may be sent in a single webhook call, this is not the case. If you send more
-        # than one card, only the first will be posted to the channel.
-        data = {"type": "message", "attachments": [card.serialize()]}
-        self.response = await self.client.post(self.url, json=data, headers=headers)
+        self.response = await self.client.post(self.url, json=json, headers=headers)
         if self.response.status_code != httpx.codes.OK:
             raise TeamsWebhookError(self.response.text)
         if "429" in self.response.text:
