@@ -12,9 +12,11 @@ Instead of plaintext messages, Microsoft Teams uses JSON data structures called 
 
 ### Install
 
-Until the package reaches stability, this package will not be added to PyPI. For now, install it from git:
+Until the package reaches stability, this package will not be added to PyPI. For now, install it from GitHub:
 
-`pip install git+https://github.com/decoupca/msteams_webhooks.git`
+```sh
+pip install git+https://github.com/decoupca/msteams_webhooks.git
+```
 
 ### Create a Webhook URL
 
@@ -54,18 +56,8 @@ The `text` property also supports [a subset of Markdown](https://support.microso
 Here's how to build the example Hero Card from the [documentation](https://learn.microsoft.com/en-us/microsoftteams/platform/task-modules-and-cards/cards/cards-reference#hero-card):
 
 ```python
-from msteams_webhooks import TeamsWebhook
-from msteams_webhooks.buttons import OpenURLButton
-from msteams_webhooks.cards import AdaptiveCard, HeroCard
+from msteams_webhooks import TeamsWebhook, HeroCard, OpenURLButton
 channel = TeamsWebhook('<your-webhook-url>')
-official_website = OpenURLButton(
-    title="Official website",
-    url="https://www.seattlemonorail.com"
-)
-wikipedia_page = OpenURLButton(
-    title="Wikipedia page",
-    url="https://en.wikipedia.org/wiki/Seattle_Center_Monorail"
-)
 card = HeroCard(
     title='Seattle Center Monorail',
     subtitle='Seattle Center Monorail',
@@ -73,7 +65,16 @@ card = HeroCard(
             "(near the Space Needle) and downtown Seattle. It was built for the 1962 World's Fair. "
             "Its original two trains, completed in 1961, are still in service."),
     images=["https://upload.wikimedia.org/wikipedia/commons/thumb/4/49/Seattle_monorail01_2008-02-25.jpg/1024px-Seattle_monorail01_2008-02-25.jpg"],
-    buttons=[official_website, wikipedia_page]
+    buttons=[
+        OpenURLButton(
+            title="Official website",
+            url="https://www.seattlemonorail.com"
+        ),
+        OpenURLButton(
+            title="Wikipedia page",
+            url="https://en.wikipedia.org/wiki/Seattle_Center_Monorail"
+        )
+    ]
 )
 channel.send_card(card)
 ```
