@@ -191,7 +191,9 @@ class AsyncTeamsWebhook:
         self.response = None
 
     async def send_card(
-        self, card: Optional[Card] = None, json: Optional[dict[Any, Any]] = None,
+        self,
+        card: Optional[Card] = None,
+        json: Optional[dict[Any, Any]] = None,
     ) -> None:
         """Sends a card to the channel.
 
@@ -210,7 +212,7 @@ class AsyncTeamsWebhook:
         # more than one, only the first will be posted to the channel.
         json = json or {}
         if not card and not json:
-            raise ValueError("Must provide either `card` or `json` values.") # noqa: TRY003
+            raise ValueError("Must provide either `card` or `json` values.")  # noqa: TRY003
         if card:
             json = {"type": "message", "attachments": [card.serialize()]}
         if json:
