@@ -38,6 +38,7 @@ class TeamsWebhook:
         *,
         verify: Union[str, bool, ssl.SSLContext] = True,
         timeout: float = 15.0,
+        version: Optional[str] = None,
     ) -> None:
         """Construct webhook object.
 
@@ -46,6 +47,7 @@ class TeamsWebhook:
             verify: How to handle HTTPS certificate verification.
             timeout: Global timeout in seconds for all HTTP operations.
                 May be further tuned with an ``httpx.Timeout`` object.
+            version: AdaptiveCard version to send with send_message().
 
         Returns:
             None.
@@ -56,6 +58,7 @@ class TeamsWebhook:
         self.url = url
         self.client = httpx.Client(verify=verify, timeout=timeout)
         self.response = None
+        self.version = version or "1.6"
 
     def send_card(self, card: Optional[Card] = None, json: Optional[dict[Any, Any]] = None) -> None:
         """Sends a card to the channel.
