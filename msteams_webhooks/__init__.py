@@ -38,7 +38,6 @@ class TeamsWebhook:
         *,
         verify: Union[str, bool, ssl.SSLContext] = True,
         timeout: float = 15.0,
-        version: Optional[str] = None,
     ) -> None:
         """Construct webhook object.
 
@@ -47,7 +46,6 @@ class TeamsWebhook:
             verify: How to handle HTTPS certificate verification.
             timeout: Global timeout in seconds for all HTTP operations.
                 May be further tuned with an ``httpx.Timeout`` object.
-            version: AdaptiveCard version to send with send_message().
 
         Returns:
             None.
@@ -58,7 +56,6 @@ class TeamsWebhook:
         self.url = url
         self.client = httpx.Client(verify=verify, timeout=timeout)
         self.response = None
-        self.version = version or "1.6"
 
     def send_card(self, card: Optional[Card] = None, json: Optional[dict[Any, Any]] = None) -> None:
         """Sends a card to the channel.
@@ -119,6 +116,7 @@ class TeamsWebhook:
         weight: Optional[types.FontWeights] = None,
         style: Optional[types.TextBlockStyles] = None,
         wrap: bool = True,
+        version: Optional[str] = None,
     ) -> None:
         """Sends a basic text message to the channel.
 
@@ -140,6 +138,7 @@ class TeamsWebhook:
             weight: Controls the weight of TextBlock elements.
             wrap: If true, allow `text` to wrap. Otherwise, text is clipped. Default: False
             style: The style of this TextBlock for accessibility purposes.
+            version: Schema version to advertise.
 
         Returns:
             None.
@@ -159,7 +158,7 @@ class TeamsWebhook:
             wrap=wrap,
             style=style,
         )
-        self.send_card(card=AdaptiveCard(body=[text_block], version=self.version))
+        self.send_card(card=AdaptiveCard(body=[text_block], version=version))
 
 
 class AsyncTeamsWebhook:
@@ -174,7 +173,6 @@ class AsyncTeamsWebhook:
         *,
         verify: Union[str, bool, ssl.SSLContext] = True,
         timeout: float = 15.0,
-        version: Optional[str] = None,
     ) -> None:
         """Construct webhook object.
 
@@ -183,7 +181,6 @@ class AsyncTeamsWebhook:
             verify: How to handle HTTPS certificate verification.
             timeout: Global timeout in seconds for all HTTP operations.
                 May be further tuned with an ``httpx.Timeout`` object.
-            version: AdaptiveCard version to send with send_message().
 
         Returns:
             None.
@@ -194,7 +191,6 @@ class AsyncTeamsWebhook:
         self.url = url
         self.client = httpx.AsyncClient(verify=verify, timeout=timeout)
         self.response = None
-        self.version = version or "1.6"
 
     async def send_card(
         self,
@@ -259,6 +255,7 @@ class AsyncTeamsWebhook:
         weight: Optional[types.FontWeights] = None,
         style: Optional[types.TextBlockStyles] = None,
         wrap: bool = True,
+        version: Optional[str] = None,
     ) -> None:
         """Sends a basic text message to the channel.
 
@@ -280,6 +277,7 @@ class AsyncTeamsWebhook:
             weight: Controls the weight of TextBlock elements.
             wrap: If true, allow `text` to wrap. Otherwise, text is clipped. Default: False
             style: The style of this TextBlock for accessibility purposes.
+            version: Schema version to advertise.
 
         Returns:
             None.
@@ -299,7 +297,7 @@ class AsyncTeamsWebhook:
             wrap=wrap,
             style=style,
         )
-        await self.send_card(card=AdaptiveCard(body=[text_block], version=self.version))
+        await self.send_card(card=AdaptiveCard(body=[text_block], version=version))
 
 
 __all__ = (
