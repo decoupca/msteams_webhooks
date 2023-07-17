@@ -159,7 +159,7 @@ class TeamsWebhook:
             wrap=wrap,
             style=style,
         )
-        self.send_card(card=AdaptiveCard(body=[text_block]))
+        self.send_card(card=AdaptiveCard(body=[text_block], version=self.version))
 
 
 class AsyncTeamsWebhook:
@@ -174,6 +174,7 @@ class AsyncTeamsWebhook:
         *,
         verify: Union[str, bool, ssl.SSLContext] = True,
         timeout: float = 15.0,
+        version: Optional[str] = None,
     ) -> None:
         """Construct webhook object.
 
@@ -182,6 +183,7 @@ class AsyncTeamsWebhook:
             verify: How to handle HTTPS certificate verification.
             timeout: Global timeout in seconds for all HTTP operations.
                 May be further tuned with an ``httpx.Timeout`` object.
+            version: AdaptiveCard version to send with send_message().
 
         Returns:
             None.
@@ -192,6 +194,7 @@ class AsyncTeamsWebhook:
         self.url = url
         self.client = httpx.AsyncClient(verify=verify, timeout=timeout)
         self.response = None
+        self.version = version or "1.6"
 
     async def send_card(
         self,
@@ -237,7 +240,7 @@ class AsyncTeamsWebhook:
         """
         headers = {"Content-Type": "application/json"}
         self.response = await self.client.post(self.url, json=json, headers=headers)
-        if self.response.status_code != httpx.codes.OK:
+        if self.response.status_code != httpx.codes.OK or 'error' in self.response.text.lower():
             raise TeamsWebhookError(self.response.text)
         if "429" in self.response.text:
             # Rate limit errors receive HTTP code 200 with 429 in response body.
@@ -296,7 +299,7 @@ class AsyncTeamsWebhook:
             wrap=wrap,
             style=style,
         )
-        await self.send_card(card=AdaptiveCard(body=[text_block]))
+        await self.send_card(card=AdaptiveCard(body=[text_block], version=self.version))
 
 
 __all__ = (
