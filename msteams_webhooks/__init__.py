@@ -240,7 +240,7 @@ class AsyncTeamsWebhook:
         """
         headers = {"Content-Type": "application/json"}
         self.response = await self.client.post(self.url, json=json, headers=headers)
-        if self.response.status_code != httpx.codes.OK or 'error' in self.response.text.lower():
+        if self.response.status_code != httpx.codes.OK or "error" in self.response.text.lower():
             raise TeamsWebhookError(self.response.text)
         if "429" in self.response.text:
             # Rate limit errors receive HTTP code 200 with 429 in response body.
