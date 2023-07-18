@@ -78,7 +78,7 @@ class TeamsWebhook:
             raise ValueError("Must provide either `card` or `json` values.")  # noqa TRY003
         if card:
             json = {"type": "message", "attachments": [card.serialize()]}
-        if json:
+        else:
             json = {"type": "message", "attachments": [json]}
         self.send_json(json=json)
 
@@ -217,7 +217,7 @@ class AsyncTeamsWebhook:
             raise ValueError("Must provide either `card` or `json` values.")  # noqa: TRY003
         if card:
             json = {"type": "message", "attachments": [card.serialize()]}
-        if json:
+        else:
             json = {"type": "message", "attachments": [json]}
         await self.send_json(json=json)
 
