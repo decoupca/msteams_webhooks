@@ -71,9 +71,13 @@ class TeamsWebhook:
             TeamsRateLimitError: if "429" was found inside the response body.
         """
         headers = {"Content-Type": "application/json"}
-        self.response = self.client.post(self.url, json=json, headers=headers)
-        if self.response.status_code != httpx.codes.OK or "error" in self.response.text.lower():
+        self.response = self.client.post(url=self.url, json=json, headers=headers)
+        if self.response.status_code != httpx.codes.OK:
             raise TeamsWebhookError(self.response.text)
+        if "400" in self.response.text:
+            # Malformed requests return HTTP code 200 with 400 in response body.
+            msg = "Bad request. Check that the message payload syntax is correct."
+            raise TeamsWebhookError(msg)
         if "429" in self.response.text:
             # Rate limit errors receive HTTP code 200 with 429 in response body.
             raise TeamsRateLimitError()
@@ -207,9 +211,13 @@ class AsyncTeamsWebhook:
             TeamsRateLimitError: if "429" was found inside the response body.
         """
         headers = {"Content-Type": "application/json"}
-        self.response = await self.client.post(self.url, json=json, headers=headers)
-        if self.response.status_code != httpx.codes.OK or "error" in self.response.text.lower():
+        self.response = await self.client.post(url=self.url, json=json, headers=headers)
+        if self.response.status_code != httpx.codes.OK:
             raise TeamsWebhookError(self.response.text)
+        if "400" in self.response.text:
+            # Malformed requests return HTTP code 200 with 400 in response body.
+            msg = "Bad request. Check that the message payload syntax is correct."
+            raise TeamsWebhookError(msg)
         if "429" in self.response.text:
             # Rate limit errors receive HTTP code 200 with 429 in response body.
             raise TeamsRateLimitError()
