@@ -57,32 +57,7 @@ class TeamsWebhook:
         self.client = httpx.Client(verify=verify, timeout=timeout)
         self.response = None
 
-    def send_card(self, card: Optional[Card] = None, json: Optional[dict[Any, Any]] = None) -> None:
-        """Sends a card to the channel.
-
-        Args:
-            card: The ``Card`` to send. Only one card may be sent at a time.
-            json: Raw JSON card data to send. Useful for debugging or testing.
-
-        Returns:
-            None.
-
-        Raises:
-            None.
-        """
-        # Since the attachments value is a list, you might think you can send more
-        # than one card to the channel at once, but this isn't true. If you send
-        # more than one, only the first will be posted to the channel.
-        json = json or {}
-        if not card and not json:
-            raise ValueError("Must provide either `card` or `json` values.")  # noqa TRY003
-        if card:
-            json = {"type": "message", "attachments": [card.serialize()]}
-        else:
-            json = {"type": "message", "attachments": [json]}
-        self.send_json(json=json)
-
-    def send_json(self, json: dict[Any, Any]) -> None:
+    def _send_json(self, json: dict[Any, Any]) -> None:
         """Posts a raw JSON payload to the webhook URL.
 
         Args:
@@ -102,6 +77,32 @@ class TeamsWebhook:
         if "429" in self.response.text:
             # Rate limit errors receive HTTP code 200 with 429 in response body.
             raise TeamsRateLimitError()
+
+    def send_card(self, card: Optional[Card] = None, data: Optional[dict[Any, Any]] = None) -> None:
+        """Sends a card to the channel.
+
+        Args:
+            card: The ``Card`` to send. Only one card may be sent at a time.
+            data: Raw card data structure to send. Must conform to a card schema
+                spec. Useful for debugging or testing.
+
+        Returns:
+            None.
+
+        Raises:
+            None.
+        """
+        # Since the attachments value is a list, you might think you can send more
+        # than one card to the channel at once, but this isn't true. If you send
+        # more than one, only the first will be posted to the channel.
+        data = data or {}
+        if not card and not data:
+            raise ValueError("Must provide either `card` or `data` values.")  # noqa TRY003
+        if card:
+            json = {"type": "message", "attachments": [card.serialize()]}
+        else:
+            json = {"type": "message", "attachments": [data]}
+        self._send_json(json=json)
 
     def send_message(
         self,
@@ -192,36 +193,7 @@ class AsyncTeamsWebhook:
         self.client = httpx.AsyncClient(verify=verify, timeout=timeout)
         self.response = None
 
-    async def send_card(
-        self,
-        card: Optional[Card] = None,
-        json: Optional[dict[Any, Any]] = None,
-    ) -> None:
-        """Sends a card to the channel.
-
-        Args:
-            card: The ``Card`` to send. Only one card may be sent at a time.
-            json: Raw JSON card data to send. Useful for debugging or testing.
-
-        Returns:
-            None.
-
-        Raises:
-            None.
-        """
-        # Since the attachments value is a list, you might think you can send more
-        # than one card to the channel at once, but this isn't true. If you send
-        # more than one, only the first will be posted to the channel.
-        json = json or {}
-        if not card and not json:
-            raise ValueError("Must provide either `card` or `json` values.")  # noqa: TRY003
-        if card:
-            json = {"type": "message", "attachments": [card.serialize()]}
-        else:
-            json = {"type": "message", "attachments": [json]}
-        await self.send_json(json=json)
-
-    async def send_json(self, json: dict[Any, Any]) -> None:
+    async def _send_json(self, json: dict[Any, Any]) -> None:
         """Posts a raw JSON payload to the webhook URL.
 
         Args:
@@ -241,6 +213,36 @@ class AsyncTeamsWebhook:
         if "429" in self.response.text:
             # Rate limit errors receive HTTP code 200 with 429 in response body.
             raise TeamsRateLimitError()
+
+    async def send_card(
+        self,
+        card: Optional[Card] = None,
+        data: Optional[dict[Any, Any]] = None,
+    ) -> None:
+        """Sends a card to the channel.
+
+        Args:
+            card: The ``Card`` to send. Only one card may be sent at a time.
+            data: Raw card data structure to send. Must conform to a card schema
+                spec. Useful for debugging or testing.
+
+        Returns:
+            None.
+
+        Raises:
+            None.
+        """
+        # Since the attachments value is a list, you might think you can send more
+        # than one card to the channel at once, but this isn't true. If you send
+        # more than one, only the first will be posted to the channel.
+        data = data or {}
+        if not card and not data:
+            raise ValueError("Must provide either `card` or `data` values.")  # noqa: TRY003
+        if card:
+            json = {"type": "message", "attachments": [card.serialize()]}
+        else:
+            json = {"type": "message", "attachments": [data]}
+        await self._send_json(json=json)
 
     async def send_message(
         self,
