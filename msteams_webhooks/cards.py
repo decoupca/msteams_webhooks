@@ -38,6 +38,7 @@ class AdaptiveCard(Card):
         lang: Optional[str] = None,
         vertical_content_alignment: Optional[types.VerticalAlignmentTypes] = None,
         schema: Optional[str] = None,
+        msteams: Optional[dict[str, Any]] = None,
     ) -> None:
         """An Adaptive Card, containing a free-form body of card elements.
 
@@ -61,6 +62,10 @@ class AdaptiveCard(Card):
                 within the container. Only relevant for fixed-height cards, or cards with a
                 `min_height` specified.
             schema: Card schema URL.
+            msteams: Microsoft Teams-specific card properties. Primarily used for full width
+                styling of cards/messages. For full screen width card add the following line
+                to your card config: ``card.msteams={"width": "Full"}``.
+
 
         Returns:
             None.
@@ -78,6 +83,7 @@ class AdaptiveCard(Card):
         self.lang = lang
         self.vertical_content_alignment = vertical_content_alignment
         self.schema = schema or "http://adaptivecards.io/schemas/adaptive-card.json"
+        self.msteams = msteams
 
     def serialize(self) -> dict[str, Any]:
         """Serialize object into data structure."""
@@ -103,6 +109,8 @@ class AdaptiveCard(Card):
             payload["content"]["speak"] = self.speak
         if self.lang:
             payload["content"]["lang"] = self.lang
+        if self.msteams:
+            payload["content"]["msteams"] = self.msteams
         if self.vertical_content_alignment:
             payload["content"]["verticalContentAlignment"] = self.vertical_content_alignment
         return payload

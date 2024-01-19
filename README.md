@@ -103,6 +103,13 @@ You can inspect any object's JSON payload by calling its `serialize()` method. T
  'contentType': 'application/vnd.microsoft.card.adaptive'}
 ```
 
+#### Microsoft Teams-specific card properties.
+If you want to display your card(s) over the full width in a Teams channel (especially for desktop), then add the following code to your card config:
+
+```python
+card.msteams = {"width": "Full"}
+```
+
 ### HTTP Tuning
 
 #### HTTPS Certificate Verification
